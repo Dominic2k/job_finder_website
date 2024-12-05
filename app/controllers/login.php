@@ -16,18 +16,14 @@ class login extends DController{
                     print_r($_SESSION['current']);
                     if($value['role']==3){
                         //link đến trang chủ mặc định
-                        echo('good');
                         header('Location: http://localhost/job_finder_website/');
                         exit();
                     }else if($value['role']==2){
-                        echo('good2');
+                        header('Location: ../z-Demo');
                         //link đến trang dashboard của nhà tuyển dụng
-                        header('Location: http://localhost/job_finder_website/recruiter/recruiter');
-                        exit();
                     }
                     // đổi link??? ???
                 }else{
-                    
                 }
             }
             echo("<script>alert('Không tìm thấy tài khoản hợp lệ!');</script>");

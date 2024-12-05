@@ -10,7 +10,7 @@
         height:100vh;
         margin:0;
         padding:0;
-        background:pink;
+        background-color: #f9f9f9;
         display:flex;
         flex-direction:column;
     }
@@ -18,11 +18,15 @@
         width:100%;
         display:flex;
         flex-grow:1;
-        background-color:green;
+        background-color:inherit;
     }
     .rg-left{
         width:40%;
         height:100%;
+        background-image:url(../public/img/log.png);
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
     }
     .rg-right{
         width:60%;
@@ -30,20 +34,14 @@
         display:flex;
         flex-direction:column;
         align-items:center;
-        background-color:yellow;
+        background-color:white;
         padding-top:50px;
-    }
-    .lg-right{
-        width:60%;
-        height:100%;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        background-color:yellow;
-        padding-top:120px;
     }
     .rg-mainPart{
         width:60%;
+    }
+    .rg-oMainPart{
+        padding-top:190px;
     }
     .rg-section{
         width:100%;
@@ -54,9 +52,10 @@
     .rg-option{
         padding:5px 10px;
         margin:0 10px;
+        border-radius:5px;
     }
     .rg-option:hover{
-        background:green;
+        background:blue;
     }
     .rg-option:hover > a > b{
         color:white;
@@ -67,16 +66,18 @@
     .rg-form h1{
         text-align:center;
     }
-    .rg-field{
+    .rg-field1{
         width:100%;
         display:flex;
-        margin-bottom:20px;
+        margin-bottom:15px;
     }
-    .rg-field input{
+    .rg-field1 input{
         flex:1;
         background:inherit;
         display:inline-block;
         height:30px;
+        outline:none;
+        border:1px solid gray;
     }
     .rg-industry{
         flex:1;
@@ -88,14 +89,22 @@
         width: 100%;
         margin:10px 0;
         padding: 10px 0;
+        border-radius:5px;
+        color:white;
+        background:blue;
+        border:none;
     }
     .rg-titleField{
         margin-bottom:5px;
     }
     .rg-button2{
-        margin:10px 0;
-        padding: 10px 20px;
+        margin:5px 0;
+        padding: 5px 20px;
         margin-left:20px;
+        background-color:blue;
+        border:none;
+        border-radius:5px;
+        color:white;
     }
     .rg-progress{
         width: 100%;
@@ -108,7 +117,7 @@
         width: 30px;
         height:30px;
         border-radius:50px;
-        border:1px solid black;
+        border:1px solid blue;
         display:flex;
         justify-content:center;
         align-items:center;
@@ -130,41 +139,37 @@
         margin:10px 0;
     }
     .background-green{
-        background-color:green !important;
+        background-color:blue !important;
     }
     .border-green{
-        border:1px solid green !important;
+        border:1px solid blue !important;
     }
     .text-white{
         color:white !important;
     }
     .text-green{
-        color:green !important;
+        color:blue !important;
     }
 </style>
 <div class="rg-parent">
     <div class="rg-left">
         
     </div>
-    <div class="lg-right">
+    <div class="rg-right  rg-oMainPart">
         <div class="rg-mainPart">
-            <div class="rg-section">
-                <div class="rg-option" id="rg-op1"><a class="a" href="register-back.php?register=1"><b id="rg-opB1">Ứng viên</b></a></div>
-                <div class="rg-option" id="rg-op2"><a class="a" href="register-back.php?register=2"><b id="rg-opB2">Nhà tuyển dụng</b></a></div>
-            </div>
             <form action="?url=login/login" method="POST" name="myForm" class="rg-form">
                 <h1>Đăng Nhập</h1>
                 <div class="rg-titleField"><b>Email</b></div>
-                <div class="rg-field">
+                <div class="rg-field1">
                     <input type="email" placeholder="Nhập email" name="rg-email" required>
                 </div>
                 <div class="rg-titleField"><b>Mật khẩu</b></div>
-                <div class="rg-field">
+                <div class="rg-field1">
                     <input type="password" placeholder="Nhập mật khẩu" name="rg-password" required>
                 </div>
                 <button type="submit" class="rg-button1" name="logIn">Đăng Nhập</button>
             </form>
-            <div class="rg-field">Bạn chưa có tài khoản?<a href="?url=register/registerUser">Đăng ký</a></div>
+            <div class="rg-field1">Bạn chưa có tài khoản? &nbsp<a href="http://localhost/job_finder_website/register/registerUser" >Đăng ký</a></div>
         </div><!--body right-->
     </div><!-- rg-right-->
 </div><!--container-->

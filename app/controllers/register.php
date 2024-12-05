@@ -2,7 +2,7 @@
 session_start();
 class register extends DController{
     public function __construct(){
-        $data = array();
+        $data=array();
         parent::__construct();
     }
     public function registerUser(){
@@ -11,7 +11,6 @@ class register extends DController{
         $model=$this->load->model('registerModel');
         $data['user']=$model->getUser();
         if(isset($_POST['register1'])){
-            extract($data);
             foreach($user as $value){
                 if($value['email']==$_POST['rg-email']){
                     unset($_POST['register1']);
@@ -29,7 +28,6 @@ class register extends DController{
                 echo("<script>alert('Email đã tồn tại!');</script>");
             }
         }
-        print_r($data);
         $this->load->view('register',$data);
     }
     public function registerCompany1(){
@@ -41,7 +39,6 @@ class register extends DController{
             foreach($data['user'] as $value){
                 if($value['email']==$_POST['rg-email']){
                     unset($_POST['register2']);
-                    echo("lll");
                     break;
                 }else{
                 }
@@ -53,12 +50,10 @@ class register extends DController{
                 header('Location: ?url=register/registerCompany2');
                 exit();
             }else{
-                echo('kkk');
                 unset($_POST['rg-fullname']);unset($_POST['rg-phone']);unset($_POST['rg-email']);unset($_POST['rg-password']);unset($_SESSION['loadData']);unset($_SESSION['loadCompany']);
                 echo("<script>alert('Email đã tồn tại!');</script>");
             }
         }
-        print_r($data);
         $this->load->view('register',$data);
     }
     //
@@ -68,12 +63,9 @@ class register extends DController{
         $data['user']=$model->getUser();
         $data['company']=$model->getCompany();
         $data['industry']=$model->getIndustry();
-        echo("kkkkk");
-        print_r($_SESSION['loadData']);
-        echo($_SESSION['loadData'][0]);
         if(isset($_POST['register3'])){
             foreach($data['company'] as $value){
-                if($value['company_name']==$_POST['rg-companyName']){
+                if($value['comp_name']==$_POST['rg-companyName']){
                     unset($_POST['register3']);
                     break;
                 }else{

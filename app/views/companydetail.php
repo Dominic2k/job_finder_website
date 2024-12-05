@@ -65,6 +65,9 @@
         justify-content:center;
         align-items:center;
     }
+    .icon-info i{
+        color:blue;
+    }
     .b-flex-column{
         display:flex;
         flex-direction:column;
@@ -134,10 +137,9 @@
         justify-content:center;
         align-items:center;
         padding:2px 20px;
-        background:yellow;
     }
     .control-displayJob:hover{
-        background:red;
+        background:#b8b8b8;
         cursor:pointer;
     }
 </style>
@@ -159,22 +161,22 @@ $numJob= count($job);
         </div>
         <div class="banber-info">
             <div class="b-row">
-                <h1 style="margin:0;padding:0;"><?php if(isset($company)){echo($company[0]['company_name']);} ?></h1>
+                <h1 style="margin:0;padding:0;"><?php if(isset($company)){echo($company[0]['comp_name']);} ?></h1>
                 <div class="numJob"><?php if(isset($job)){echo(count($job));}?> công việc</div>
             </div>
             <div class="b-row">
-                <a href="<?php if(isset($company)){echo($company[0]['company_website']);} ?>"> <?php if(isset($company)){echo($company[0]['company_website']);} ?></a>
+                <a href="<?php if(isset($company)){echo($company[0]['comp_website']);} ?>"> <?php if(isset($company)){echo($company[0]['comp_website']);} ?></a>
             </div>
             <div class="b-row" style="gap:0 30px;">
                 <div  class="b-row">
-                    <div class="icon-info"><i></i></div>
+                    <div class="icon-info"><i class="fas fa-fire"></i></div>
                     <div class="b-flex-column">
                         <div>Ngày thành lập</div>
                         <div><b><?php echo isset($company[0]['founded_date']) ? htmlspecialchars($company[0]['founded_date']) : "N/A"; ?></b></div>
                     </div>
                 </div>
                 <div  class="b-row">
-                    <div class="icon-info"><i></i></div>
+                    <div class="icon-info"><i class="fas fa-users"></i></div>
                     <div class="b-flex-column">
                         <div>Nhân viên</div>
                         <div>
@@ -185,14 +187,14 @@ $numJob= count($job);
                     </div>
                 </div>
                 <div class="b-row">
-                    <div class="icon-info"><i></i></div>
+                    <div class="icon-info"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="b-flex-column">
                         <div>Trụ sở</div>
-                        <div><b><?php if(isset($company)){echo($company[0]['company_address']);} ?></b></div>
+                        <div><b><?php if(isset($company)){echo($company[0]['comp_address']);} ?></b></div>
                     </div>
                 </div>
                 <div class="b-row">
-                    <div class="icon-info"><i></i></div>
+                    <div class="icon-info"><i class="fas fa-building"></i></div>
                     <div class="b-flex-column">
                         <div>Ngành</div>
                         <div>
@@ -216,75 +218,29 @@ $numJob= count($job);
 </div><!-- com-->
 <br>
 <div class="cf" >
-    <div class="com2" style="border-bottom:1px solid black">
+    <div class="com2" style=" box-shadow: 0 2px 3px -3px rgba(0, 0, 0, 0.5);">
         <div class="com2-left" >
             <h2>Hồ sơ công ty</h2>
             <div>
-                    <?php if(isset($company)){echo($company[0]['description']);} ?>
+                    <?php if(isset($company)){echo($company[0]['comp_description']);} ?>
             </div>
-            <h2>Các trang mạng xã hội</h2>
-            <div class="b-row" style="gap:0 20px;">
-                <div class="itemC">
-                    <i></i><a href="#">fackebook.com</a>
-                </div>
-                <div class="itemC">
-                    <i></i><a href="#">fackebook.com</a>
-                </div>
-            </div><br>
-            <div class="b-row flex-wrap" style="gap: 10px 10px;">
-                <div class="box-image">
-                    <img src="#" alt="ảnh công ty">
-                </div>
-                <div class="box-image">
-                    <img src="#" alt="ảnh công ty">
-                </div>
+            <h2>Quyền lợi và lợi ích</h2>
+            <div class="b-row flex-wrap" >
+                    <?php 
+                        if(isset($company)){
+                            echo($company[0]['comp_benefit']);
+                        } 
+                    ?>
             </div>
-            <br>
         </div>
         <div class="com2-right">
-            <h2 style="margin-bottom:10px;padding:0;">Các công nghệ</h2>
-            <div class="b-row flex-wrap" style="border-bottom:1px solid black;gap:10px 10px;padding-bottom:10px;" >
-                <div class="itemC mar">HTML5</div>
-                <div class="itemC mar">HTML5</div>
-                <div class="itemC mar">HTML5</div>
-                <?php
-                    if(isset($technologies)){
-                        foreach($technologies as $technology){
-                            echo("<div class='itemC mar'>".$technology['technology_name']."</div>");
-                        }
-                    } 
-                ?>
-            </div>
             <h2 style="margin-bottom:10px;padding:0;">Trụ sở công ty</h2>
             <!--<p class="mar" style="margin-bottom:10px">công tay có x trụ sở</p>-->
-            <div class="b-flex-column"  style="border-bottom:1px solid black;gap:20px 0;padding-bottom:10px;">
-                <p class="mar"><b>Đà Nẵng</b></p>
-                <p class="mar"><b><?php if(isset($company)){echo($company[0]['company_address']);} ?></b></p>
-
+            <div class="b-flex-column"  style="gap:20px 0;padding-bottom:10px;">
+                <p class="mar"><b><?php if(isset($company)){echo($company[0]['comp_address']);} ?></b></p>
             </div>
         </div><!--com2-right-->
     </div><!--com2-->
-</div>
-<div class="cf">
-    <h2>Quyền lợi và lợi ích</h2>
-    <div class="b-row flex-wrap" >
-        <p>
-            <?php 
-                if(isset($company)){
-                    echo($company[0]['comp_benefit']);
-                } 
-            ?>
-        </p>
-    
-        <!--<div class="card_benefic">
-            <h3>Chăm sóc sức khỏe toàn diện</h3>
-            <div>
-            Chúng tôi tin vào một cộng đồng thịnh vượng 
-                và điều đó bắt đầu từ việc đội ngũ của chúng tôi
-                phải hạnh phúc và khỏe mạnh.
-            </div>
-        </div>-->
-    </div>
 </div>
 <div class="cf" style="background:rgb(248,248,253);">
     <div class="b-row" style="justify-content:space-between;">
@@ -298,7 +254,7 @@ $numJob= count($job);
                 $dateCurent= new dateTime();
                 $list2=[];
                 foreach($job as $value){
-                    $dedJob=new dateTime($value['deadline']);
+                    $dedJob=new dateTime($value['job_deadline']);
                     if($dedJob>$dateCurent){
                         array_push($list2, $value);
                     }
@@ -307,7 +263,7 @@ $numJob= count($job);
                 foreach($job as $index => $value){
                     $ind = null;
                     foreach($industry as $valuechil){
-                        if($value['industry_id']==$valuechil['industry_id']){
+                        if($company[0]['industry_id']==$valuechil['industry_id']){
                             $ind=$valuechil;
                             break;
                         }else{
@@ -330,7 +286,7 @@ $numJob= count($job);
                             </div>
                             <div class="card__content">
                                 <h3 ><?php echo htmlspecialchars($value['job_title']); ?></h3>
-                                <p ><?php echo htmlspecialchars($value['location']); ?></p>
+                                <p ><?php echo htmlspecialchars($value['job_location']); ?></p>
                                 <div class="card__tags">
                                 <span class="tag "><?php echo isset($ty) ? htmlspecialchars($ty['job_type_name']) : 'N/A'; ?></span>
                                 <span class="tag "><?php echo isset($ind) ? htmlspecialchars($ind['industry_name']) : 'N/A';?></span>

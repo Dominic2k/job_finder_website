@@ -15,12 +15,11 @@ class companydetail extends DController{
                 $idU=$data['company'][0]['user_id'];
                 $data['job']=$model->getJob($idU);
                 $data['industry']=$model->getIndustry();
-                $data['technologies']=$model->getTechnologies($data['company'][0]['industry_id']);
                 $data['job_type']=$model->getJob_Type();
                 $this->load->view('companydetail',$data);
             }
         }else{
-            echo("Không có tham số truyền vào");
+            echo("Error! Please call to police now!");
         }
     }
 }

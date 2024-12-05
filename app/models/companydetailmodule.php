@@ -9,7 +9,7 @@
             return $this->db->select($sql,$data);
         }
         public function getJob($user_id){
-            $sql = "select * from jobs where user_id = :user_id and job_status='open'";
+            $sql = "select * from jobs where user_id = :user_id and job_status='open'";;
             $data=[':user_id'=>$user_id];
             return $this->db->select($sql,$data);
         }
@@ -17,11 +17,6 @@
             $sql = "select * from industries";
             return $this->db->select($sql);
         }
-        // public function getTechnologies($idI){
-        //     $sql = "select * from technologies where company_id=:id";
-        //     $data=[':id'=>$idI];
-        //     return $this->db->select($sql,$data);
-        // }
         public function getJob_Type(){
             $sql = "select * from job_types";
             return $this->db->select($sql);

@@ -28,8 +28,8 @@
             <div class="logo-job-header">
                 <img src="https://th.bing.com/th/id/OIP.nENBwk5XIZwapRzUo_7VWQHaHa?w=512&h=512&rs=1&pid=ImgDetMain" alt="Stripe">
                 <span>JobFunny</span>
-                <a href="#">Tìm việc</a>
-                <a href="#">Duyệt các công ty</a>
+                <a class="a1" href="http://localhost/job_finder_website/searchjob/searchjob/industry=,pr=,type=,level=,search=">Tìm việc</a>
+                <a class="a2" href="http://localhost/job_finder_website/searchcompany/searchcompany/industry=,size=,search=">Duyệt các công ty</a>
             </div>
     
             <div class="auth-buttons" >
@@ -230,7 +230,7 @@
         window.location.href = "http://localhost/job_finder_website/login/login";
     });
     registerBtn.addEventListener('click', function () {
-        window.location.href = "http://localhost/job_finder_website/login/login?url=register/registerUser";
+        window.location.href = "http://localhost/job_finder_website/register/registerUser";
     }
     );
 </script>
