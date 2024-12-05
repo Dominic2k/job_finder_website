@@ -21,7 +21,7 @@
                 </ul>
             </nav>
             <div class="logout">
-                <button>Đăng xuất</button>
+                <button id="logoutBtn">Đăng xuất</button>
                 <div class="user-info">
                     <?php
                         if (isset($_SESSION['current'])) {
@@ -234,6 +234,12 @@
     plugins: 'lists link image table code',
     toolbar: 'undo redo | bold italic underline | bullist numlist | link image | code', // Cấu hình toolbar
     height: 200
+});
+
+const logoutBtn = document.getElementById('logoutBtn');
+
+logoutBtn.addEventListener('click', function() {
+    window.location.href = "http://localhost/job_finder_website/logout.php";
 });
 </script>
 </body>
