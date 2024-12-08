@@ -48,7 +48,6 @@ class jobmodel extends DModel {
         return $this->db->select($sql, $data);
     }
     
-
     public function topthreejob($table_jobs, $id) {
         $sql = "
                 SELECT j.*
@@ -100,48 +99,20 @@ class jobmodel extends DModel {
 
     }
 
-    // Trong file jobmodel.php
+    public function getJobById($job_id) {
+        // Viết câu SQL để lấy công việc theo job_id
+        $sql = "SELECT jobs.*, companies.*, job_types.*
+                FROM jobs
+                JOIN users ON jobs.user_id = users.user_id
+                JOIN companies ON users.user_id = companies.user_id
+                JOIN job_types ON jobs.job_type_id = job_types.job_type_id
+                WHERE jobs.job_id = :job_id LIMIT 1";
+        $data = [':job_id' => $job_id];
 
-public function getJobById($job_id) {
-    // Viết câu SQL để lấy công việc theo job_id
-    $sql = "SELECT jobs.*, companies.*, job_types.*
-            FROM jobs
-            JOIN users ON jobs.user_id = users.user_id
-            JOIN companies ON users.user_id = companies.user_id
-            JOIN job_types ON jobs.job_type_id = job_types.job_type_id
-            WHERE jobs.job_id = :job_id LIMIT 1";
-    $data = [':job_id' => $job_id];
+        // Thực thi truy vấn và trả về kết quả
+        return $this->db->select($sql, $data);
+    }
 
-    // Thực thi truy vấn và trả về kết quả
-    return $this->db->select($sql, $data);
-}
-
-     
-    // public function jobbyid($table_jobs, $id) {
-    //     $sql = "select * from " . $table_jobs . " where job_id =:id";
-    
-    //     $data = array(':id' => $id);
-    
-    //     return $this->db->select($sql, $data);
-    // }
-
-    // public function userbyid($table_users, $id) {
-    //     if (!is_numeric($id)) {
-    //         throw new Exception("Invalid ID");
-    //     }
-    //     $sql = "SELECT users.full_name, users.email, users.phone 
-    //             FROM $table_users 
-    //             WHERE $table_users.user_id = :id";
-    //     $data = [':id' => $id];
-    
-    //     // Debug
-    //     $result = $this->db->select($sql, $data);
-    //     if (empty($result)) {
-    //         die("Không có thông tin người dùng trong database.");
-    //     }
-    
-    //     return $result;
-    // }
 
     public function jobbyid($table_jobs, $id) {
         if (!is_numeric($id)) {
@@ -205,5 +176,8 @@ public function getJobById($job_id) {
         return $this->db->delete($table_jobs, $condition);
     }
 
+    public function updateStatusJob($table_jobs, $data, $condition) {
+        return $this->db->update($table_jobs, $data, $condition);
+    }
 }
 
