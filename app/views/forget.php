@@ -36,7 +36,6 @@
         align-items:center;
         background-color:white;
         padding-top:50px;
-        position:relative;
     }
     .rg-mainPart{
         width:60%;
@@ -151,54 +150,51 @@
     .text-green{
         color:blue !important;
     }
-    .breadcrumb {
-    background-color: transparent;
-    font-size: 16px;
-    display:flex;
-    list-style-type:none;
-    position:absolute;
-    top:0;
-    left:0
-    }
-    .breadcrumb-item a {
-        text-decoration: none;
-        color: black;
-    }
-
-    .breadcrumb-item a:hover {
-        text-decoration: underline;
-    }
-    .breadcrumb-item, .active {
-    font-weight: bold;
-    color: #007bff; /* Màu xanh lam */
-    }
 </style>
 <div class="rg-parent">
     <div class="rg-left">
         
     </div>
     <div class="rg-right  rg-oMainPart">
-        <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                <li style="margin-right:10px" class="breadcrumb-item"><a  href="http://localhost/job_finder_website/">Trang chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Trang đăng nhập</li>
-                </ol>
-        </nav>
         <div class="rg-mainPart">
-            <form action="?url=login/login" method="POST" name="myForm" class="rg-form">
-                <h1>Đăng Nhập</h1>
+            <?php if(isset($data['check'])&&$data['check']==1): ?>
+            <form action="http://localhost/job_finder_website/forget/forget" method="POST" name="myForm" class="rg-form">
+                <h1>Nhập vào Email của bạn!</h1>
                 <div class="rg-titleField"><b>Email</b></div>
                 <div class="rg-field1">
                     <input type="email" placeholder="Nhập email" name="rg-email" required>
                 </div>
-                <div class="rg-titleField"><b>Mật khẩu</b></div>
-                <div class="rg-field1">
-                    <input type="password" placeholder="Nhập mật khẩu" name="rg-password" required>
-                </div>
-                <button type="submit" class="rg-button1" name="logIn">Đăng Nhập</button>
+                <button type="submit" class="rg-button1" name="forget">Tiếp tục</button>
             </form>
-            <div style="margin-bottom:0;" class="rg-field1">Bạn chưa có tài khoản? &nbsp<a href="http://localhost/job_finder_website/register/registerUser" >Đăng ký</a></div>
-            <div style="margin-top:5px;" class="rg-field1">Bạn quên mật khẩu? &nbsp<a href="http://localhost/job_finder_website/forget/forget" >Tạo mật khẩu mới</a></div>
+            <?php endif ; ?>
+            <?php if(isset($data['check'])&&$data['check']==2) : ?>
+                <form action="http://localhost/job_finder_website/forget/forget2" method="POST" name="myForm" class="rg-form" onsubmit="return validateForm();">
+                    <h1>Nhập vào mã xác nhận!</h1>
+                    <div class="rg-titleField"><b>Code</b></div>
+                    <div class="rg-field1">
+                        <input type="text" placeholder="Nhập mã" name="code" required>
+                    </div>
+                    <div class="rg-titleField"><b>Mật khẩu</b></div>
+                    <div class="rg-field1">
+                        <input type="password" placeholder="Nhập mật khẩu" name="de_pass" required>
+                    </div>
+                    <div class="rg-titleField"><b>Mật lại khẩu</b></div>
+                    <div class="rg-field1">
+                        <input type="password" placeholder="Nhập lại mật khẩu" name="de_pass2" required>
+                    </div>
+                    <button type="submit" class="rg-button1" name="forget2">Xác nhận</button>
+                </form>
+            <?php endif ;?>
         </div><!--body right-->
     </div><!-- rg-right-->
 </div><!--container-->
+<script>
+    function validateForm() {
+        var pass = document.forms["myForm"]["de_pass"].value;
+        var confirm_pass = document.forms["myForm"]["de_pass2"].value;
+        if ( pass != confirm_pass) {
+            alert("Bạn phải nhập 2 mật khẩu khớp với nhau!");
+            return false;
+        }
+    }
+</script>
