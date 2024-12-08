@@ -17,6 +17,9 @@ class applicationModel extends DModel {
         return $this->db->select($sql, $data);
     }
 
+    public function updateStatusApplication($table_applications, $data, $condition) {
+        return $this->db->update($table_applications, $data, $condition);
+    }
 
 }
 ?>

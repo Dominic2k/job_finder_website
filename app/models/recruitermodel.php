@@ -38,7 +38,20 @@ class recruitermodel extends DModel {
         }
         return $result;
     }
-    
+
+
+    public function getUserById($table_users,$id) {
+        $sql = "SELECT 
+                    * from $table_users
+                WHERE 
+                    $table_users.user_id = :id";
+        $data = [':id' => $id];
+        $result = $this->db->select($sql, $data);
+        if (empty($result)) {
+            die("Không tìm thấy user với ID: " . $id);
+        }
+        return $result;
+    }
     
 
     // public function userbyid($table_users, $id) {

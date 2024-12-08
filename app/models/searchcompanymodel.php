@@ -15,7 +15,7 @@
             $sql = "select * from job_types";
             return $this->db->select($sql);
         }
-        public function getCompanies($parameter =false){
+        public function getCompanies($parameter = []){
             if (!empty($parameter)) {
                 extract($parameter);
                 $condi = "";

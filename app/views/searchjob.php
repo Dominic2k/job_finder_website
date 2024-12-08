@@ -125,9 +125,11 @@
         align-items: center;
         background-color: #fff;
     }
+
     .job-logo {
     width: 60px;
     height: 60px;
+    margin-right: 20px;
     }
 
     .job-info {
@@ -302,7 +304,7 @@ if(isset($data)&&$data){
     if(!getSessionStorage('filter_jobs')){
         <?php if(!empty($array_filter) && $array_filter):?>
             <?php extract($array_filter);  ?>
-        let object=
+        var object=
         {
             a: <?php echo json_encode(!empty($industry) ? explode('a2x', $industry) : []); ?>,
             b: <?php echo json_encode(!empty($type) ? explode('a2x', $type) : []); ?>,
@@ -312,7 +314,7 @@ if(isset($data)&&$data){
         }
         sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php else: ?>
-            let object={ a:[],b:[],c:[],d[],e:null};
+            var object={ a:[],b:[],c:[],d:[],e:null};
             sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php endif ;?>
     }
@@ -537,7 +539,7 @@ if(isset($data)&&$data){
                 `
                 <div class="job-card">
                     <div class="cardJob-part1">
-                        <img src="stripe-logo.png" alt="Stripe" class="company-logo">
+                        <img class='job-logo' src="../../public/img/${comA.comp_logo}" alt="Stripe" class="company-logo">
                         <div class="company-info">
                             <div>
                                 <h3>${job.job_title}</h3>
