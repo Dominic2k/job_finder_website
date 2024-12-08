@@ -80,11 +80,32 @@ class Main {
     //         }
     //     }
     // }
+    // public function callMethod() {
+    //     if ($this->controller === null) {
+    //         header("Location: " . BASE_URL . "index/notfound");
+    //         return;
+    //     }
+    //     $methodName = $this->url[1] ?? $this->methodName;
+    //     $parameter = $this->url[2] ?? null;
+    
+    //     if (method_exists($this->controller, $methodName)) {
+    //         if ($parameter) {
+    //             $this->controller->{$methodName}($parameter);
+    //         } else {
+    //             $this->controller->{$methodName}();
+    //         }
+    //     } else {
+    //             header("Location: " . BASE_URL . "index/notfound");
+    //     }
+    // }
+
     public function callMethod() {
-        if ($this->controller === null) {
-            header("Location: " . BASE_URL . "index/notfound");
+        // Nếu controller là null, chuyển hướng đến trang lỗi, nhưng tránh khi đang ở trang lỗi
+        if ($this->controller === null && $this->url[0] !== 'homepage/notfound') {
+            header("Location: " . BASE_URL . "homepage/notfound");
             return;
         }
+    
         $methodName = $this->url[1] ?? $this->methodName;
         $parameter = $this->url[2] ?? null;
     
@@ -95,7 +116,11 @@ class Main {
                 $this->controller->{$methodName}();
             }
         } else {
-                header("Location: " . BASE_URL . "index/notfound");
+            // Nếu phương thức không tồn tại, chuyển hướng đến trang lỗi
+            if ($this->url[0] !== 'homepage/notfound') {
+                header("Location: " . BASE_URL . "homepage/notfound");
+            }
         }
     }
+    
 }
