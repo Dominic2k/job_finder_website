@@ -5,19 +5,19 @@ class jobmodel extends DModel {
     public function __construct() {
         parent::__construct();
     }
-    public function job($table_jobs) {
-        $sql = "select * from " . $table_jobs;
-        return $this->db->select($sql);
-    }
+    // public function job($table_jobs) {
+    //     $sql = "select * from " . $table_jobs;
+    //     return $this->db->select($sql);
+    // }
 
     public function countjob($table_jobs, $id) {
         $sql = "SELECT 
                     u.user_id AS recruiter_id,
                     u.full_name AS recruiter_name,
                     COUNT(DISTINCT j.job_id) AS total_jobs_posted,
-                    SUM(CASE WHEN a.application_status = 'rejected' THEN 1 ELSE 0 END) AS total_rejected,
-                    SUM(CASE WHEN a.application_status = 'accepted' THEN 1 ELSE 0 END) AS total_accepted,
-                    SUM(CASE WHEN a.application_status = 'pending' THEN 1 ELSE 0 END) AS total_pending
+                    SUM(CASE WHEN a.application_status = 'Đã từ chối' THEN 1 ELSE 0 END) AS total_rejected,
+                    SUM(CASE WHEN a.application_status = 'Đã chấp nhận' THEN 1 ELSE 0 END) AS total_accepted,
+                    SUM(CASE WHEN a.application_status = 'Chờ xử lí' THEN 1 ELSE 0 END) AS total_pending
                 FROM 
                     users u
                 LEFT JOIN 

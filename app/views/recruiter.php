@@ -6,13 +6,32 @@
     <title>Nhà tuyển dụng</title>
     <link rel="stylesheet" href="../public/css/recruiter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tiny.cloud/1/swqgfqe5l90l69fjhsx5hywhqrqvo5n5djj34ve5in5yflqu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
+<?php if (isset($_SESSION['flash_message'])): ?>
+    <script>
+        Swal.fire({
+            title: "<?php echo $_SESSION['flash_message']['type'] === 'success' ? 'Thành công!' : 'Thất bại!'; ?>",
+            text: "<?php echo $_SESSION['flash_message']['message']; ?>",
+            icon: "<?php echo $_SESSION['flash_message']['type']; ?>",
+            timer: 3000,
+            showConfirmButton: false
+        });
+    </script>
+    <?php unset($_SESSION['flash_message']); ?>
+<?php endif; ?>
     <div class="profile-container">
         <aside class="sidebar">
-            <div class="logo">JobFunny</div>
+            <div class="logo">
+            <div class="logo-job-header">
+                    <img src="../public/img/logo_web.jpg" alt="Stripe">
+                    <span>JobEverlight</span>
+                </div>
+            </div>
             <nav class="menu">
                 <ul>
                     <li><a href="#" id="home-button"><i class="fa-solid fa-house"></i>Trang chủ</a></li>
@@ -21,7 +40,6 @@
                 </ul>
             </nav>
             <div class="logout">
-                <button id="logoutBtn">Đăng xuất</button>
                 <div class="user-info">
                     <?php
                         if (isset($_SESSION['current'])) {
@@ -34,14 +52,10 @@
                         }
                     ?>
                 </div>
+                <button onclick="window.location.href = 'http://localhost/job_finder_website/recruiter/logout'" id="logoutBtn">Đăng xuất</button>
             </div>
         </aside>
         <main class="main-content">
-        <?php
-            if (isset($msg)) {
-                echo 'Thêm thành công';
-            }
-        ?>
             <?php 
                 require_once 'personal_info_recruiter.php';
             ?>
@@ -234,12 +248,6 @@
     plugins: 'lists link image table code',
     toolbar: 'undo redo | bold italic underline | bullist numlist | link image | code', // Cấu hình toolbar
     height: 200
-});
-
-const logoutBtn = document.getElementById('logoutBtn');
-
-logoutBtn.addEventListener('click', function() {
-    window.location.href = "http://localhost/job_finder_website/logout.php";
 });
 </script>
 </body>

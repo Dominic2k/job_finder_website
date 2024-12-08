@@ -60,7 +60,7 @@
        let total_pending = document.getElementById('total_pending').textContent;
      function createPerformanceData() {
          return {
-             labels: ['Open Jobs', 'Closed Jobs', 'Pending Applications', 'Accepted Applications'],
+             labels: ['Tổng số công việc', 'Từ chối', 'Chờ xử lí', 'Chấp nhận'],
              datasets: [{
                  label: 'Job Performance',
                  data: [total_jobs, total_rejected, total_accepted, total_pending],

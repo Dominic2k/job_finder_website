@@ -8,7 +8,7 @@ class Database extends PDO {
         $statement = $this->prepare($sql);
 
         foreach($data as $key => $value) {
-            $statement->bindParam($key, $value);
+            $statement->bindValue($key, $value);
         }
         
         $statement->execute();
@@ -46,8 +46,14 @@ class Database extends PDO {
             $statement->bindValue(":$key", $value);
         }
         return $statement->execute();
-    }
 
+        if (!$statement->execute()) {
+            echo "Lỗi cập nhật dữ liệu!";
+        } else {
+            echo "Cập nhật thành công!";
+        }
+        
+    }
 
 
     public function delete($table, $condition, $limit = 1) {
