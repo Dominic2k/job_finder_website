@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <style>
     *{
         box-sizing:border-box;
@@ -16,6 +24,10 @@
         padding-top:10px;
         padding-bottom:10px;
         padding-right:2%;
+        background-color:#F8F8FD ;
+    }
+    .hearer-company{
+        padding-top:70px;
     }
     .banner-company{
         display:flex;
@@ -142,6 +154,26 @@
         background:#b8b8b8;
         cursor:pointer;
     }
+    .breadcrumb {
+    background-color: transparent;
+    font-size: 16px;
+    display:flex;
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    }
+    .breadcrumb-item a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .breadcrumb-item:hover {
+        text-decoration: underline;
+    }
+    .breadcrumb-item, .active {
+    font-weight: bold;
+    color: #007bff; /* Màu xanh lam */
+    }
 </style>
 <?php
 if(isset($data)&&$data){
@@ -153,8 +185,14 @@ if(isset($job)){
 if(isset($company)){
 }
 $numJob= count($job);
+include_once 'app/views/header.php';
 ?>
-<div class="cf" style="background:rgb(248,248,253);">
+<div class="cf hearer-company" style="background:rgb(248,248,253);">
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item" id="return">Quay lại</li>
+            </ol>
+    </nav>
     <div class="banner-company">
         <div class="logo-company">
             <img src="" alt="Logo">
@@ -244,7 +282,7 @@ $numJob= count($job);
 </div>
 <div class="cf" style="background:rgb(248,248,253);">
     <div class="b-row" style="justify-content:space-between;">
-        <h2>Việt làm mở</h2>
+        <h2>Việc làm</h2>
         <div class="control-displayJob" data-ctrlD="1">></div>
     </div>
     <div class="b-row flex-wrap" style="gap: 10px 20px;justify-content: space-between;">
@@ -329,4 +367,10 @@ $numJob= count($job);
             })
         }
     })
+    var retu = document.getElementById('return');
+    retu.addEventListener('click',function(){
+        history.back();
+    })
 </script>
+</body>
+</html>

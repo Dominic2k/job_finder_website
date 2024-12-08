@@ -13,15 +13,16 @@
     }
     .covere{
         padding: 20px 2%;
+        padding-top:70px;
     }
-    .header {
+    .head-resCom {
     text-align: center;
     padding: 20px 10px;
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
     }
 
-    .header .highlight {
+    .head-resCom .highlight {
     color: #007bff;
     }
 
@@ -178,14 +179,33 @@
         overflow: hidden; /* Ẩn nội dung thừa */
         text-overflow: ellipsis; /* Thêm dấu ba chấm */
     }
+  .breadcrumb {
+    background-color: transparent;
+    font-size: 16px;
+    display:flex;
+    list-style-type:none;
+    }
+    .breadcrumb-item a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .breadcrumb-item a:hover {
+        text-decoration: underline;
+    }
+    .breadcrumb-item, .active {
+    font-weight: bold;
+    color: #007bff; /* Màu xanh lam */
+    }  
 </style>
 <?php
 if(isset($data)&&$data){
     extract($data);
+    include_once 'app/views/header.php';
 }
 ?>
 <div class="covere">
-<div class="header">
+<div class="head-resCom">
     <h1>Tìm kiếm <span class="highlight">công ty mơ ước</span></h1>
     <p>Tìm những công ty phù hợp nhất với bạn</p>
     <div class="search-bar">
@@ -193,6 +213,13 @@ if(isset($data)&&$data){
         <button class="search-button" id="search-button">Tìm kiếm</button>
     </div>
 </div>
+<nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li style="margin-right:10px" class="breadcrumb-item"><a  href="http://localhost/job_finder_website/">Trang chủ</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Trang tìm kiếm công ty</li>
+        </ol>
+</nav>
+
 </div>
 
 <main class="main-content">
