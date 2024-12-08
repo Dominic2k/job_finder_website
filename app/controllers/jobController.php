@@ -46,8 +46,7 @@ class jobController extends DController{
                 'type' => 'error',
                 'message' => 'Cập nhật trạng thái công việc thất bại!'
             ];
-        }
-        
+        }        
         header("Location: http://localhost/job_finder_website/recruiter/recruiter");
         exit();
 
