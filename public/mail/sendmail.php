@@ -14,19 +14,7 @@ require 'PHPMailer-master/src/SMTP.php';
 $mail = new PHPMailer(true);
 $ma="";
 $content="";
-if (isset($_GET['fa'])){
-    $ma=$_SESSION['email'];
-    $content="Đây là mã xác nhận tài khoảng của bạn <b>12345</b>";
-    $_SESSION['code']="12345";
-}else if (isset($_GET['inform'])){
-    $ma=$_SESSION['con-email'];
-    $content=
-    "Xin chào <b>{$_SESSION['con-user'][0]}</b> đã đến với cửa hàng chúng tôi!<br>
-    Tài khoảng của bạn: <b>{$_SESSION['con-user'][1]}</b><br>
-    Mật khẩu của bạn: <b>{$_SESSION['con-user'][2]}</b><br>
-    Email của bạn: <b>{$_SESSION['con-email']} </b>
-    ";
-}else if (isset($_POST['forget'])){
+if (isset($_POST['forget'])){
     $ma=$_SESSION['de_email'];
     $randomNumber = mt_rand(1, 99999);
     $code=$randomNumber."";

@@ -235,7 +235,6 @@ class recruiter extends DController{
         header("Location: http://localhost/job_finder_website/recruiter/recruiter");
         exit();
     }
-    
 
     public function logout() {
         session_start(); // Đảm bảo gọi session_start() ở đầu file PHP

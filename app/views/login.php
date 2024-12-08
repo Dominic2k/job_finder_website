@@ -170,7 +170,7 @@
     }
     .breadcrumb-item, .active {
     font-weight: bold;
-    color: #007bff; /* Màu xanh lam */
+    color: #007bff;
     }
 </style>
 <div class="rg-parent">

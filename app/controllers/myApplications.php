@@ -1,6 +1,6 @@
 <?php
 // app/controllers/HomeController.php
-
+require 'email_config.php';
 class myApplications extends DController {
     public function __construct() {
         parent::__construct();
@@ -10,7 +10,7 @@ class myApplications extends DController {
         $profileModel = $this->load->model('profileModel');
         $applicationModel = $this->load->model('applicationModel');
         
-        $user_id = 1; // Giả sử ID người dùng hiện tại là 1
+        $user_id = 1;
 
         // Lấy thông tin từ model
         $data['user_info'] = $profileModel->getUserInfo($user_id); 
@@ -21,6 +21,7 @@ class myApplications extends DController {
 
 
     public function updateStatusApplication() {
+        session_start();
         $application = $this->load->model('applicationModel');
 
         $application_id = $_GET['id'];
@@ -47,15 +48,39 @@ class myApplications extends DController {
 
         $msgUpdateStatusApplication = $application->updateStatusApplication($table_application, $data, $condition);
 
-        if($msgUpdateStatusApplication == 1) {
-            echo "Cập nhật thành công!";
-            header("Location: http://localhost/job_finder_website/recruiter/recruiter");
-            exit();
-        }else {
-            echo 'Cập nhật thất bại'; 
+        $data['application_info'] = $application->getApplicationInfo($application_id); 
+        
+        
+        if (!$data['application_info'] || empty($data['application_info'][0])) {
+            die('Dữ liệu từ getApplicationInfo không hợp lệ hoặc rỗng');
         }
 
+
+        $toEmail = $data['application_info'][0]['email'];
+        $toAddress = $data['application_info'][0]['job_location'];
+        $fullname = $data['application_info'][0]['fullname'];
+        $job_name = $data['application_info'][0]['job_title'];
+        $time = date('Y-m-d H:i:s', strtotime('+1 week'));
+        
+        
+        if ($msgUpdateStatusApplication == 1) {
+            $_SESSION['flash_message'] = [
+                'type' => 'success',
+                'message' => 'Đã chấp nhận ứng viên và gửi thư mời!'
+            ];
+        } else {
+            $_SESSION['flash_message'] = [
+                'type' => 'error',
+                'message' => 'Đã từ chối ứng viên!'
+            ];
+        }
+
+
+        if ($status == 'accept' && $msgUpdateStatusApplication == 1) {
+            sendConfirmationEmail($toEmail, $toAddress, $fullname, $job_name, $time);
+        }
+        
+        header("Location: http://localhost/job_finder_website/recruiter/recruiter");
+        exit();
     }
 }
-
-?>
