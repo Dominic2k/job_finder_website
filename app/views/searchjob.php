@@ -312,7 +312,7 @@ if(isset($data)&&$data){
         }
         sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php else: ?>
-            let object={ a:[],b:[],c:[],d[],e:null};
+            let object={ a:[],b:[],c:[],d:[],e:null};
             sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php endif ;?>
     }

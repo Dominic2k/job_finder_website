@@ -468,7 +468,7 @@ if(isset($data)&&$data){
                 var numJoC=listJoC.length;
                 boxListC.innerHTML +=
                 `
-                <a href="?http://localhost/job_finder_website/companydetail/companydetail/${com.comp_name}">
+                <a href="http://localhost/job_finder_website/companydetail/companydetail/${com.comp_name}">
                     <div class="company-card">
                         <img src="stripe-logo.png" alt="Stripe" class="company-logo">
                         <div class="company-info">
