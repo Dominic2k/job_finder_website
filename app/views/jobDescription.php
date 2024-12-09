@@ -16,8 +16,8 @@
     <!-- Header -->
     <div class="job-header">
         <a class="WebFunny" href="<?php echo BASE_URL; ?>">
-            <img src="public/img/logoWebsite.jpg" alt="JobFunny">
-            <span>JobFunny</span>
+            <img src="public/img/logo_web.jpg" alt="JobFunny">
+            <span>JobEverlight</span>
 
         </a>
 

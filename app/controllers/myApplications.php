@@ -25,7 +25,6 @@ class myApplications extends DController {
         $this->load->view('myApplications', $data); // Truyền dữ liệu sang view
     }
 
-
     public function updateStatusApplication() {
         session_start();
         $application = $this->load->model('applicationModel');
@@ -84,6 +83,44 @@ class myApplications extends DController {
 
         if ($status == 'accept' && $msgUpdateStatusApplication == 1) {
             sendConfirmationEmail($toEmail, $toAddress, $fullname, $job_name, $time);
+        }
+        
+        header("Location: http://localhost/job_finder_website/recruiter/recruiter");
+        exit();
+    }
+
+    public function applyNewJob() {
+        session_start();
+        $applicationmodel = $this->load->model('applicationModel');
+        $table_applications = 'applications';
+
+        //Check file
+
+        // Các cột trong bảng applications
+        $job_title = $_POST['job_title'];
+        $job_status = $_POST['job_status'];
+        $job_description = $_POST['job_description'];
+
+        // Bỏ các cột đó vào
+        $data = array(
+            'user_id' => $user_id,
+            'job_title' => $job_title,
+            'job_type_id' => $job_type_id,
+            'job_status' => $job_status
+        );
+
+        $result = $applicationmodel->insertjob($table_applications, $data);
+
+        if ($result == 1) {
+            $_SESSION['flash_message'] = [
+                'type' => 'success',
+                'message' => 'Thêm thành công!'
+            ];
+        } else {
+            $_SESSION['flash_message'] = [
+                'type' => 'error',
+                'message' => 'Thêm thất bại!'
+            ];
         }
         
         header("Location: http://localhost/job_finder_website/recruiter/recruiter");

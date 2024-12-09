@@ -46,7 +46,7 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
                     <div id="user-info" class="user-info">
                         <a href="<?php echo BASE_URL; ?>/myProfile/myProfile">
 
-                            <img class="logoAccount" src="<?php echo BASE_URL . '/' . $_SESSION['current']['avatar']; ?>" alt="User Avatar" class="user-avatar">
+                            <img class="logoAccount" src="public/img/<?php echo $_SESSION['current']['avatar']; ?>" alt="User Avatar" class="user-avatar">
                         </a>
                         <span id="username" class="username"><?php echo $_SESSION['current']['full_name']; ?></span>
                     </div>
