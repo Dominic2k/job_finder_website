@@ -82,8 +82,9 @@ class jobDescription extends DController {
                 if (!is_dir($upload_dir)) {
                     mkdir($upload_dir, 0755, true);
                 }
-    
+   
                 $file_path = $upload_dir . $file_name;
+
     
                 // Di chuyển file tạm thời vào thư mục uploads
                 if (move_uploaded_file($cv_file['tmp_name'], $file_path)) {

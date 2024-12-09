@@ -19,6 +19,7 @@ class applicationModel extends DModel {
     }
     public function saveApplication($user_id, $job_id, $cv_file, $apply_at) {
         // Dữ liệu cần thêm vào bảng applications
+
         $data = [
             'user_id' => $user_id,
             'job_id' => $job_id,
@@ -34,7 +35,6 @@ class applicationModel extends DModel {
     public function updateStatusApplication($table_applications, $data, $condition) {
         return $this->db->update($table_applications, $data, $condition);
     }
-
 
     public function getApplicationInfo($application_id) {
         $sql = "SELECT 
@@ -53,6 +53,10 @@ class applicationModel extends DModel {
                 a.application_id = :application_id;";
         $data = [':application_id' => $application_id];
         return $this->db->select($sql, $data);
+    }
+
+    public function applyNewJob($table_applications, $data) {
+        return $this->db->insertApplication($table_applications, $data);
     }
 
 }

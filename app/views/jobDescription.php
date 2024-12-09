@@ -259,7 +259,7 @@
 
         <!-- Thông tin cá nhân và form nộp đơn -->
         <div class="info-personal-myApplicationDetail">
-        <form action="<?php echo BASE_URL . 'jobDescription/submitApplication'; ?>" method="POST" enctype="multipart/form-data" name="myApplyForm" class="rg-applyform">
+        <form action="<?php echo BASE_URL . 'myApplications/applyNewJob'; ?>" method="POST" enctype="multipart/form-data" name="myApplyForm" class="rg-applyform">
     <!-- Các trường thông tin cá nhân -->
     <div class="info-personal">
         <h4 class="full_name">Họ và tên</h4>
