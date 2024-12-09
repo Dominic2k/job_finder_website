@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Tiết Công Việc</title>
-    <link rel="stylesheet" href="public/css/jobDescription.css">
+    <link rel="stylesheet" href="public/css/jobDescription.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Calistoga&family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> -->
@@ -15,10 +15,13 @@
 <body>
     <!-- Header -->
     <div class="job-header">
-        <img src="https://th.bing.com/th/id/OIP.nENBwk5XIZwapRzUo_7VWQHaHa?w=512&h=512&rs=1&pid=ImgDetMain" alt="JobFunny">
-        <span>JobFunny</span>
+        <a class="WebFunny" href="<?php echo BASE_URL; ?>">
+            <img src="public/img/logoWebsite.jpg" alt="JobFunny">
+            <span>JobFunny</span>
 
-        <a href="#">Tìm việc</a>
+        </a>
+
+        <a class="findJobs href="#">Tìm việc</a>
 
         <!-- <div class="auth-buttons">
             <button class="btn-login">Đăng nhập</button>
@@ -41,7 +44,7 @@
                 <div class="right-job-summary">
                     <!-- <i class="fas fa-share-alt"></i>
                     <div class="behind-line"></div> -->
-                    <button class="btn-apply">Nộp</button>
+                    <button id="applyBtn" class="btn-apply">Nộp</button>
                 </div>
             </div>
         </div>
@@ -129,11 +132,11 @@
     <div class="company-info">
         <div class="company-description">
             <div class="top-company-description">
-                <img src="<?php echo $job['logo'] ?>" alt="logo_company">
+                <img src="<?php echo $job['comp_logo'] ?>" alt="logo_company">
 
                 <div class="moreInfo-company">
                     <h3><?php echo $job['comp_name'] ?></h3>
-                    <a href="#" class="read-more">Đọc thêm về <?php echo $job['comp_name'] ?> <i class="fas fa-arrow-right"></i></a>
+                    <a href="<?php echo BASE_URL; ?>searchcompany/searchcompany/industry=<?php echo $job['comp_id'];?>,size=,search=" class="read-more">Đọc thêm về <?php echo $job['comp_name'] ?> <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -156,7 +159,7 @@
         <div class="similar-job-container">
         <div class="header-similar-jobs">
             <h2>Những công việc <span>tương tự</span></h2>
-            <a href="#" class="show-more-jobs">Hiển thị tất cả công việc <i class="fas fa-arrow-right"></i></a>
+            <a href="<?php echo BASE_URL; ?>searchjob/searchjob/industry=,pr=,type=,level=,search=?" class="show-more-jobs">Hiển thị tất cả công việc <i class="fas fa-arrow-right"></i></a>
         </div>
     
         <div class="job-grid">
@@ -164,7 +167,7 @@
                 <?php foreach ($similarJobs as $similarJob): ?>
                 <a href="#" class="job-card">
                 <div class="job-logo">
-                    <img src="<?php echo $similarJob['logo']; ?>" alt="Logo">
+                    <img src="<?php echo $similarJob['comp_logo']; ?>" alt="Logo">
                 </div>
                 <div class="infor-job-card">
                     <h3><?php echo $similarJob['job_title']; ?></h3>
@@ -172,9 +175,9 @@
                         <span>• <?php echo isset($similarJob['comp_address']) ? $similarJob['comp_address'] : 'Chưa xác định'; ?></span>
                     </p>
                     <div class="job-tags">
-                        <?php if ($similarJob['job_type_name'] == 'fulltime'): ?>
+                        <?php if ($similarJob['job_type_name'] == 'Fulltime'): ?>
                             <span class="tag-full-time"><?php echo $similarJob['job_type_name']; ?></span>
-                        <?php elseif ($similarJob['job_type_name'] == 'parttime'): ?>
+                        <?php elseif ($similarJob['job_type_name'] == 'Parttime'): ?>
                             <span class="tag-part-time"><?php echo $similarJob['job_type_name']; ?></span>
                         <?php else: ?>
                             <span class="tag-internship"><?php echo $similarJob['job_type_name']; ?></span>
@@ -238,5 +241,93 @@
             </div>
         </div>
     </div>
+
+    <!-- Overlay mờ -->
+    <div class="overlay" style="display: none;"></div>
+
+    <div class="myApplicationDetail-container">
+    <div class="myApplicationDetail-small-container">
+        <!-- Thông tin công việc -->
+        <div class="info-job-myApplicationDetail">
+            <div class="job-logo"><img src="<?php echo $data['job']['comp_logo']; ?>" alt="logo_company"></div>
+            
+            <div class="infor-job-card">
+                <h3><?php echo $data['job']['job_title']; ?></h3>
+                <p><?php echo $data['job']['comp_name']; ?><span>• <?php echo $data['job']['comp_address']; ?></span> <span>• <?php echo $data['job']['job_type_name']; ?></span></p>
+            </div>
+        </div>
+
+        <!-- Thông tin cá nhân và form nộp đơn -->
+        <div class="info-personal-myApplicationDetail">
+        <form action="<?php echo BASE_URL . 'jobDescription/submitApplication'; ?>" method="POST" enctype="multipart/form-data" name="myApplyForm" class="rg-applyform">
+    <!-- Các trường thông tin cá nhân -->
+    <div class="info-personal">
+        <h4 class="full_name">Họ và tên</h4>
+        <input type="text" class="fullname" placeholder="Nhập họ và tên" value="<?php echo htmlspecialchars($data['user_info']['full_name']); ?>" readonly>
+    </div>
+    <div class="info-personal">
+        <h4 class="email">Email</h4>
+        <input type="text" class="email" placeholder="Nhập email" value="<?php echo htmlspecialchars($data['user_info']['email']); ?>" readonly>
+    </div>
+    <div class="info-personal">
+        <h4 class="phone">Số điện thoại</h4>
+        <input type="text" class="phoneNumber" placeholder="Nhập số điện thoại" value="<?php echo htmlspecialchars($data['user_info']['phone']); ?>" readonly>
+    </div>
+
+    <!-- Đính kèm CV -->
+    <div class="attachVC">
+        <h3>Đính kèm CV của bạn</h3>
+        <div class="attachCV-Detail">
+            <!-- <i class="fa-solid fa-paperclip"></i> -->
+            <input type="file" name="cv_file" accept="application/pdf" class="cv-input" required>
+            <p>Chọn file CV (Chỉ hỗ trợ PDF)</p>
+        </div>
+    </div>
+
+    <!-- Trường ẩn chứa job_id và user_id -->
+    <input type="hidden" name="job_id" value="<?php echo $data['job']['job_id']; ?>">
+    <input type="hidden" name="user_id" value="<?php echo $data['user_info']['user_id']; ?>">
+
+    <!-- Nút Nộp Đơn -->
+    <div class="buttonSubmit">
+        <button type="submit" name="submit_application" class="submit">Nộp Đơn</button>
+    </div>
+
+    <p>By sending the request you can confirm that you accept our Terms of Service and Privacy Policy</p>
+</form>
+
+            <?php
+                // Nếu có thông báo thành công hoặc lỗi, hiển thị nó trực tiếp
+                if (isset($data['message'])) {
+                    echo '<div class="message">' . $data['message'] . '</div>';
+                }
+            ?>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Lắng nghe sự kiện khi nút "Nộp" được nhấn
+    document.getElementById('applyBtn').addEventListener('click', function() {
+        // Lấy phần tử lớp phủ và form ứng tuyển
+        const overlay = document.querySelector('.overlay');
+        const applicationForm = document.querySelector('.myApplicationDetail-container');
+
+        // Hiển thị lớp phủ và form ứng tuyển
+        overlay.style.display = 'block';
+        applicationForm.style.display = 'block';
+    });
+
+    // Thêm sự kiện để đóng form khi nhấn vào lớp phủ (overlay)
+    document.querySelector('.overlay').addEventListener('click', function() {
+        const overlay = document.querySelector('.overlay');
+        const applicationForm = document.querySelector('.myApplicationDetail-container');
+
+        // Ẩn lớp phủ và form ứng tuyển
+        overlay.style.display = 'none';
+        applicationForm.style.display = 'none';
+    });
+</script>
+
 </body>
 </html>

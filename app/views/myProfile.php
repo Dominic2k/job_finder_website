@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../public/css/myProfile.css">
+    <link rel="stylesheet" href="../public/css/myProfile.css?v=<?php echo time();?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 
 <body>
@@ -28,20 +27,20 @@
             
             <div class="bottom-sidebar">
                 <button>
-                    <a href="#"><i class="fa-solid fa-sign-out-alt"></i> Đăng xuất</a>
+                <a href="<?php echo BASE_URL; ?>/myProfile/logout"><i class="fa-solid fa-sign-out-alt"></i> Đăng xuất</a>
                 </button>
 
                 <div class="account-bottom-sidebar">
                     <div class="img-account">
-                        <img src="../public/img/<?php echo $user[0]['avatar']; ?>" alt="avt-account">
+                        <img src="<?php echo isset($user['avatar']) ? BASE_URL . '/' . $user['avatar'] : ''; ?>" alt="avt-account">
                     </div>
 
                     <div class="info-account">
                         <!-- <h2>Lương Thông</h2>
                         <p>nlthong02@gmail.com</p> -->
 
-                        <h2><?php echo $user[0]['full_name']; ?></h2>
-                        <p><?php echo $user[0]['email']; ?></p>
+                        <h2><?php echo isset($_SESSION['current']) ? $_SESSION['current']['full_name'] : ''; ?></h2>
+                        <p><?php echo isset($_SESSION['current']) ? $_SESSION['current']['email'] : ''; ?></p>
                     </div>
                 </div>
             </div>
@@ -52,7 +51,9 @@
             <div class="myProfile">
                 <div class="header-myProfile">
                     <h2>Hồ sơ của tôi</h2>
-                    <a href="<?php echo BASE_URL; ?>" style="text-decoration: none;"><button>Quay lại trang chủ</button></a>
+                    <a href="<?php echo BASE_URL; ?>" style="text-decoration: none;">
+                        <button>Quay lại trang chủ</button>
+                    </a>
                     
                 </div>
 
@@ -71,13 +72,13 @@
                         </div>
 
                         <div class="middle-avatar-content-myProfile">
-                            <img src="../public/img/<?php echo $user[0]['avatar']; ?>" alt="avatar_account">
+                            <img src="<?php echo isset($user['avatar']) ? BASE_URL . '/' . $user['avatar'] : ''; ?>" alt="avatar_account">
                         </div>
 
                         <div class="right-avatar-content-myProfile">
                             <p>
-                                <span style="color: blue; font-weight: bold">Nhấn để thay thế</span>
-                                <!-- <span>hoặc kéo và thả</span> -->
+                                <!-- <span style="color: blue; font-weight: bold">Nhấn để thay thế</span> -->
+                                <input type="file" name="avatar" accept="image/*" class="avatar-input" />
                             </p>
                             <p>SVG, PNG, JPG hoặc GIF (tối đa 400 x 400px)</p>
                         </div>
@@ -94,34 +95,34 @@
                             <div class="form-group">
                                 <div class="fullname">
                                     <label class="name" for="fullname">Họ và tên</label>
-                                <input type="text" id="fullname" name="fullname" value="<?php echo $user[0]['full_name']; ?>" required>
+                                    <input type="text" id="fullname" name="fullname" value="<?php echo isset($user['full_name']) ? $user['full_name'] : ''; ?>" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="small-form-group">
                                     <label class="phone" for="phone">Phone Number</label>
-                                <input type="text" id="phone" name="phone" value="<?php echo $user[0]['phone']; ?>" required>
+                                    <input type="text" id="phone" name="phone" value="<?php echo isset($user['phone']) ? $user['phone'] : ''; ?>" required>
                                 </div>
 
                                 <div class="small-form-group">
                                     <label class="email" for="email">Email</label>
-                                <input type="email" id="email" name="email" value="<?php echo $user[0]['email']; ?>" required>
+                                    <input type="email" id="email" name="email" value="<?php echo isset($user['email']) ? $user['email'] : ''; ?>" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="small-form-group">
                                     <label class="birthday" for="birthday">Ngày sinh</label>
-                                    <input type="date" id="birthday" name="birthday" value="<?php echo $user[0]['date_of_birth']; ?>" required>
+                                    <input type="date" id="birthday" name="birthday" value="<?php echo isset($user['date_of_birth']) ? $user['date_of_birth'] : ''; ?>" required>
                                 </div>
 
                                 <div class="small-form-group">
                                     <label class="gender" for="gender">Giới tính</label>
                                     <select id="gender" name="gender" required>
-                                        <option value="Male" <?php if ($user[0]['gender'] == 'male') echo 'selected'; ?>>Nam</option>
-                                        <option value="Female" <?php if ($user[0]['gender'] == 'female') echo 'selected'; ?>>Nữ</option>
-                                        <option value="Khác">Khác</option>
+                                        <option value="male" <?php echo (isset($user['gender']) && $user['gender'] == 'male') ? 'selected' : ''; ?>>Nam</option>
+                                        <option value="female" <?php echo (isset($user['gender']) && $user['gender'] == 'female') ? 'selected' : ''; ?>>Nữ</option>
+                                        <option value="other" <?php echo (isset($user['gender']) && $user['gender'] == 'other') ? 'selected' : ''; ?>>Khác</option>
                                     </select>
                                 </div>
                             </div>

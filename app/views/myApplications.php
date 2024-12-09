@@ -21,29 +21,26 @@
             </div>
             
             <div class="bottom-sidebar">
-
                 <div class="account-bottom-sidebar">
                     <div class="img-account">
-                        <img src="<?php echo $user_info[0]['avatar']; ?>" alt="avt-account">
+                        <img src="<?php echo isset($_SESSION['current']['avatar']) ? BASE_URL . '/' . $_SESSION['current']['avatar'] : 'public/img/default-avatar.png'; ?>" alt="avt-account">
                     </div>
 
                     <div class="info-account">
-                        <!-- <h2>Lương Thông</h2>
-                        <p>nlthong02@gmail.com</p> -->
-
-                        <h2><?php echo htmlspecialchars($user_info[0]['full_name']); ?></h2>
-                        <p><?php echo htmlspecialchars($user_info[0]['email']); ?></p>
+                        <h2><?php echo isset($_SESSION['current']) ? $_SESSION['current']['full_name'] : ''; ?></h2>
+                        <p><?php echo isset($_SESSION['current']) ? $_SESSION['current']['email'] : ''; ?></p>
                     </div>
                 </div>
             </div>
-            
         </div>        
-    
+        
         <div class="content-myProfile">
             <div class="myProfile">
                 <div class="header-myProfile">
                     <h2>Đơn ứng tuyển của tôi</h2>
-                    <a href="<?php echo BASE_URL; ?>" style="text-decoration: none;"><button>Quay lại trang chủ</button></a>
+                    <a href="<?php echo BASE_URL; ?>" style="text-decoration: none;">
+                        <button>Quay lại trang chủ</button>
+                    </a>
                 </div>
 
                 <form action="process.php" method="POST" enctype="multipart/form-data">
@@ -62,36 +59,37 @@
                             </thead>
                             <tbody>
                             <?php
-        if (isset($applications) && !empty($applications)) {
-            $counter = 1;
-            foreach ($applications as $application) {
-                ?>
-                <tr>
-                    <td><?php echo $counter++; ?></td>
-                    <td class="company-info">
-                        <?php
-                        $logo = isset($application['comp_logo']) && !empty($application['comp_logo']) ? $application['comp_logo'] : 'default_logo.png';
-                        ?>
-                        <img src="<?php echo htmlspecialchars($logo); ?>" alt="Company Logo">
-                        <span><?php echo htmlspecialchars($application['company_name']); ?></span>
-                    </td>
-                    <td><?php echo htmlspecialchars($application['job_title']); ?></td>
-                    <td><?php echo htmlspecialchars($application['apply_at']); ?></td>
+                            if (isset($applications) && !empty($applications)) {
+                                $counter = 1;
+                                foreach ($applications as $application) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $counter++; ?></td>
+                                        <td class="company-info">
+                                            <?php
+                                            // Nếu comp_logo là URL, chỉ cần hiển thị trực tiếp URL này
+                                            $logo = isset($application['comp_logo']) && !empty($application['comp_logo']) ? $application['comp_logo'] : 'default_logo.png';
+                                            ?>
+                                            <img src="<?php echo htmlspecialchars($logo); ?>" alt="Company Logo" style="max-width: 50px; max-height: 50px;">
+                                            <span><?php echo htmlspecialchars($application['comp_name']); ?></span>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($application['job_title']); ?></td>
+                                        <td><?php echo htmlspecialchars($application['apply_at']); ?></td>
 
-                    <?php if ($application['application_status'] == 'accepted'): ?>
-                        <td><span class="status accepted"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
-                    <?php elseif ($application['application_status'] == 'pending'): ?>
-                        <td><span class="status pending"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
-                    <?php elseif ($application['application_status'] == 'rejected'): ?>
-                        <td><span class="status rejected"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
-                    <?php endif; ?>
-                </tr>
-                <?php
-            }
-        } else {
-            echo "<tr><td colspan='5'>No applications available.</td></tr>";
-        }
-        ?>
+                                        <?php if ($application['application_status'] == 'accepted'): ?>
+                                            <td><span class="status accepted"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
+                                        <?php elseif ($application['application_status'] == 'pending'): ?>
+                                            <td><span class="status pending"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
+                                        <?php elseif ($application['application_status'] == 'rejected'): ?>
+                                            <td><span class="status rejected"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <?php
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>Không có đơn ứng tuyển nào.</td></tr>";
+                            }
+                            ?>
                             </tbody>
                         </table>
                     </div>

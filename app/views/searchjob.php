@@ -299,10 +299,11 @@ if(isset($data)&&$data){
         return res
     }
     //Tạo biến session mà chương trình sẽ làm việt với nó
+    let object;
     if(!getSessionStorage('filter_jobs')){
         <?php if(!empty($array_filter) && $array_filter):?>
             <?php extract($array_filter);  ?>
-        let object=
+        object=
         {
             a: <?php echo json_encode(!empty($industry) ? explode('a2x', $industry) : []); ?>,
             b: <?php echo json_encode(!empty($type) ? explode('a2x', $type) : []); ?>,
@@ -312,7 +313,7 @@ if(isset($data)&&$data){
         }
         sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php else: ?>
-            let object={ a:[],b:[],c:[],d[],e:null};
+            object={ a:[],b:[],c:[],d:[],e:null};
             sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php endif ;?>
     }

@@ -10,6 +10,7 @@ class register extends DController{
         $data['check']="1";
         $model=$this->load->model('registerModel');
         $data['user']=$model->getUser();
+        extract($data);
         if(isset($_POST['register1'])){
             foreach($user as $value){
                 if($value['email']==$_POST['rg-email']){
