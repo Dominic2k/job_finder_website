@@ -16,20 +16,20 @@
     align-items: center;
 }
 
-.job-header-container img {
+.job-header-container > div > a > img {
     position: absolute;
     width: 40px;
     height: 40px;
     border-radius: 20px;
     object-fit: cover;
     top: 15px;
-    left: 100px;
+    left: 50px;
 }
 
-.job-header-container span {
+.job-header-container > div > span {
     position: absolute;
     top: 15px;
-    left: 155px;
+    left: 105px;
     font-size: 26px;
     font-weight: bold;
 }
@@ -51,29 +51,51 @@
     color: #515B6F;
 }
 .auth-buttons {
-    padding-right: 100px;
+    padding-right: 50px;
 }
-
-.auth-buttons button {
-    border: none;
-    font-size: 15px;;
-    width: 100px;
-    height: 40px;
-    margin: 0 10px;
-    font-weight: bold;
+.user-info{
+    width: 200px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-
 .auth-buttons .btn-login {
-    color: #4640DE;
-    background-color: white;
+    background-color: #ffe4af;
+    padding: 0px 10px;
     cursor: pointer;
+    border-radius:5px;
 }
-
+.auth-buttons .btn-login a{
+    color:white;
+}
 .auth-buttons .btn-register {
     color: white;
+    padding: 0px 10px;
     background-color: #4640DE;
     cursor: pointer;
+    border-radius:5px;
 }
+a {
+    text-decoration: none;
+}
+.auth-buttons .btn-register a{
+    color:white;
+}
+.auth-buttons .username {
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 20px;
+}
+
+.auth-buttons .logoAccount {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    object-fit: cover;
+} 
 </style>
 <div class="job-header">
         <div class="job-header-container">
@@ -85,12 +107,20 @@
             </div>
     
             <div class="auth-buttons" >
-                <button id="btn-login" class="btn-login">Đăng nhập</button>
-                <button id="btn-register" class="btn-register">Đăng ký</button>
-            </div>
-            <div id="user-info" class="user-info" style="display:none;">
-                <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
-                <span id="username" class="username">Tên người dùng</span>
+                <?php $is_logged_in = isset($_SESSION['current']) ?isset($_SESSION['current'])  : 0;if (!empty($is_logged_in)): ?>
+                    <!-- Nếu đã đăng nhập, hiển thị thông tin người dùng -->
+                    <div id="user-info" class="user-info">
+                        <span id="username" class="username"><?php echo $_SESSION['current']['full_name']; ?></span>
+                        <a href="<?php echo BASE_URL; ?>/myProfile/myProfile">
+
+                            <img class="logoAccount" src="<?php echo BASE_URL . '/' . $_SESSION['current']['avatar']; ?>" alt="User Avatar" class="user-avatar">
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <!-- Nếu chưa đăng nhập, hiển thị nút đăng nhập và đăng ký -->
+                    <button id="btn-login" class="btn-login"><a href="<?php echo BASE_URL; ?>login/login">Đăng nhập</a></button>
+                    <button id="btn-register" class="btn-register"><a href="<?php echo BASE_URL; ?>register/registerUser">Đăng ký</a></button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
