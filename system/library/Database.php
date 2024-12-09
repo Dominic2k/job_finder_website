@@ -10,7 +10,6 @@ class Database extends PDO {
         foreach($data as $key => $value) {
             $statement->bindValue($key, $value);
         }
-        
         $statement->execute();
         return $statement->fetchAll($fetchStyle);
     }
