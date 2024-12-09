@@ -1,3 +1,4 @@
+/* Tổng quan */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -18,25 +19,34 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.job-header .WebFunny {
+    position: absolute;
+    top: 27px;
+    left: 345px;
+    text-decoration: none;
+}
+
 .job-header img {
     position: absolute;
     width: 40px;
     height: 40px;
     border-radius: 20px;
     object-fit: cover;
-    top: 15px;
-    left: 100px;
+    top: -12px;
+    left: -245px;
 }
 
 .job-header span {
     position: absolute;
-    top: 22px;
-    left: 155px;
+    top: -5px;
+    left: -190px;
     font-size: 26px;
     font-weight: bold;
+    color: black;
+
 }
 
-.job-header a {
+.job-header .findJobs {
     position: absolute;
     top: 27px;
     left: 345px;
@@ -112,6 +122,17 @@ body {
     height: 60px;
     margin-right: 25px;
 }
+
+/* .right-job-summary i {
+    font-size: 20px;
+    color: #c3c3c3;
+}
+
+.right-job-summary .behind-line {
+    width: 1px;
+    height: 45px;
+    background-color: #5e5b5b;
+} */
 
 .right-job-summary button {
     margin-right: 10px;
@@ -271,7 +292,6 @@ body {
 }
 
 .top-company-description img {
-    object-fit: cover;
     width: 60px; 
     height: 60px;
 }
@@ -296,10 +316,6 @@ body {
     color: #4640DE;
     text-decoration: none;
     font-size: 14px;
-}
-
-.moreInfo-company a i {
-    padding-left: 5px;
 }
 
 .bottom-company-description {
@@ -549,4 +565,179 @@ body {
     height: 35px;
     border-radius: 20px;
     background-color: #4A4E58;
+}
+
+/* Lớp phủ mờ */
+.overlay {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);  /* Màu nền đen mờ */
+    z-index: 999;  /* Đảm bảo lớp phủ nằm trên tất cả các phần tử khác */
+    display: none;  /* Ẩn lớp phủ mặc định */
+}
+
+/* CSS form  */
+
+.myApplicationDetail-container {
+    z-index: 1000;
+    display: none;
+    position: fixed;
+    top: 90px;
+    left: 550px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    height: 710px;
+}
+
+.myApplicationDetail-small-container {
+    background-color: white;
+    width: 700px;
+    height: 700px;
+    padding: 15px 40px;
+    margin-top: 50px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-job-myApplicationDetail {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    border-bottom: 1px solid #D6DDEB;
+    padding: 0;
+}
+
+.info-personal-myApplicationDetail {
+    display: flex
+;
+    flex-direction: column;
+    padding: 10px 0 0 0;
+}
+
+.info-personal-myApplicationDetail h3 {
+    font-weight: lighter;
+    font-size: 22px;
+    margin: 10px 0 0px 0;
+}
+
+.info-job-myApplicationDetail .job-logo img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.info-job-myApplicationDetail .infor-job-card p {
+    /* font-size: 24px; */
+    color: #515B6F;
+}
+
+.info-personal-myApplicationDetail p {
+    color: #7C8493;
+    font-size: 17px;
+    padding: 10px 0 5px 0;
+}
+
+.info-personal-myApplicationDetail .info-personal {
+    display: flex
+;
+    flex-direction: column;
+    padding: 5px 0;
+}
+
+.info-personal-myApplicationDetail .info-personal h4 {
+    margin: 15px 0 20px 0;
+    font-weight: lighter;
+    /* color: #515B6F; */
+}
+
+.info-personal-myApplicationDetail .info-personal input {
+    /* margin-top: 7px; */
+    height: 35px;
+    width: 100%;
+    border: 1px solid #D6DDEB;
+}
+
+.full_name::after, .phone::after, .email::after {
+    content: "*";
+    color: red;
+    margin-left: 5px; /* Khoảng cách giữa văn bản và dấu sao */
+    font-size: 1em; /* Điều chỉnh kích thước nếu cần */
+}
+
+.line-top-bottom {
+    margin: 25px 0;
+    height: 1px;
+    border-top: 1px solid #D6DDEB;
+}
+
+.info-personal-myApplicationDetail .attachVC {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}
+
+.info-personal-myApplicationDetail .attachVC h3 {
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+.attachVC .attachCV-Detail {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    border: 1px solid #4640DE;
+    border-radius: 8px;
+    width: 300px;
+    height: 65px;
+    flex-direction: column;
+}
+
+.attachVC .attachCV-Detail i {
+    margin-right: -10px;
+    color: #4640DE;
+    font-size: 22px;
+}
+
+.attachVC .attachCV-Detail p {
+    margin-top: -2px;
+    color: #515B6F;
+    margin-bottom: 3px;
+}
+
+.underline {
+    border-top: 1px solid #D6DDEB;
+    margin: 20px 0;
+}
+
+.buttonSubmit {
+    display: flex;
+    justify-content: right;
+}
+
+.cv-input {
+    height: 35px;
+    width: 280px;
+    border: none;
+    margin: 10px 0 0 90px;
+}
+
+.info-personal-myApplicationDetail button {
+    background-color: #4640DE;
+    border: none;
+    height: 45px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0px 0 10px 0px;
+    width: 180px;
+}
+
+.info-personal-myApplicationDetail p {
+    margin: 0;
+    font-size: 16px;
 }

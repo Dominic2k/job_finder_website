@@ -1,8 +1,8 @@
 <?php
 session_start();
-class login extends DController{
-    public function __construct(){
-        $data=array();
+
+class login extends DController {
+    public function __construct() {
         parent::__construct();
     }
     public function login(){
@@ -25,9 +25,13 @@ class login extends DController{
                 }else{
                 }
             }
+
+            // Thông báo lỗi nếu không tìm thấy tài khoản hợp lệ
             echo("<script>alert('Không tìm thấy tài khoản hợp lệ!');</script>");
             unset($_POST['logIn']);
         }
+
+        // Hiển thị trang login
         $this->load->view('login');
     }
 }

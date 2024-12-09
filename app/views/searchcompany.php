@@ -263,10 +263,11 @@ if(isset($data)&&$data){
     var numPage =0;
     var listCompanyCurrent=[];
     sessionStorage.removeItem('filter_indus');
+    let object;
     if(!getSessionStorage('filter_indus')){
         <?php if(!empty($array_filter) && $array_filter):?>
             <?php extract($array_filter);  ?>
-        var object =
+        object=
         {
             a: <?php echo json_encode(!empty($industry) ? explode('%', $industry) : []); ?>,
             b: <?php echo json_encode(!empty($size) ? $size : 0); ?>,
@@ -274,7 +275,8 @@ if(isset($data)&&$data){
         }
         sessionStorage.setItem('filter_indus', JSON.stringify(object));
         <?php else: ?>
-            var object={ a:[],b:0,c:null};
+            object={ a:[],b:0,c:null};
+
             sessionStorage.setItem('filter_indus', JSON.stringify(object));
         <?php endif ;?>
     }

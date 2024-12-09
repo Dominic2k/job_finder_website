@@ -1,10 +1,17 @@
+<?php
+// Start session nếu chưa bắt đầu
+session_start();
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+$is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="public/css/homepage.css">
+    <link rel="stylesheet" href="public/css/homepage.css?v=<?php echo time(); ?>">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
@@ -26,23 +33,31 @@
     <div class="job-header">
         <div class="job-header-container">
             <div class="logo-job-header">
-                <img src="public/img/logo_web.jpg" alt="Stripe">
+
+                <img class="logoWebsite" src="public/img/logo_web.jpg" alt="Stripe">
                 <span>JobEverlight</span>
                 <a class="a1" href="http://localhost/job_finder_website/searchjob/searchjob/industry=,pr=,type=,level=,search=">Tìm việc</a>
                 <a class="a2" href="http://localhost/job_finder_website/searchcompany/searchcompany/industry=,size=,search=">Duyệt các công ty</a>
-            </div>
+    </div>
     
-            <div class="auth-buttons" >
-                <button id="btn-login" class="btn-login">Đăng nhập</button>
-                <button id="btn-register" class="btn-register">Đăng ký</button>
-            </div>
-            <div id="user-info" class="user-info" style="display:none;">
-                <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar">
-                <span id="username" class="username">Tên người dùng</span>
+            <div class="auth-buttons">
+                <?php if ($is_logged_in): ?>
+                    <!-- Nếu đã đăng nhập, hiển thị thông tin người dùng -->
+                    <div id="user-info" class="user-info">
+                        <a href="<?php echo BASE_URL; ?>/myProfile/myProfile">
+
+                            <img class="logoAccount" src="<?php echo BASE_URL . '/' . $_SESSION['current']['avatar']; ?>" alt="User Avatar" class="user-avatar">
+                        </a>
+                        <span id="username" class="username"><?php echo $_SESSION['current']['full_name']; ?></span>
+                    </div>
+                <?php else: ?>
+                    <!-- Nếu chưa đăng nhập, hiển thị nút đăng nhập và đăng ký -->
+                    <button id="btn-login" class="btn-login"><a href="<?php echo BASE_URL; ?>login/login">Đăng nhập</a></button>
+                    <button id="btn-register" class="btn-register"><a href="<?php echo BASE_URL; ?>login/register">Đăng ký</a></button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
-
     <div class="job-banner">
         <div class="job-banner-container">
             <h1>Khám phá hơn 5000+ <br> công việc</h1>
@@ -51,16 +66,23 @@
             <div class="input-search-bar">
                 <div class="input-search-detail">
                     <ion-icon name="search-outline"></ion-icon>
-                    <input type="text" placeholder="Tiêu đề công việc hoặc từ khóa">
+                    <input id="searchInput" type="text" placeholder="Tiêu đề công việc hoặc từ khóa">
                 </div>
 
-                <div class="input-search-detail">
-                    <ion-icon name="navigate-outline"></ion-icon>
-                    <input type="text" placeholder="Nhập địa điểm bạn muốn làm việc">
-                </div>
-
-                <button>Tìm kiếm</button>
+                <button id="searchButton">Tìm kiếm</button>
             </div>
+            <script>
+                document.getElementById('searchButton').addEventListener('click', function () {
+                    const input = document.getElementById('searchInput').value.trim();
+                    if (input) {
+                        // Chuyển hướng tới trang tìm kiếm và thêm nội dung tìm kiếm vào query string
+                        window.location.href = `<?php echo BASE_URL; ?>searchjob/searchjob/industry=,pr=,type=,level=,search=${encodeURIComponent(input)}?`;
+                        
+                    } else {
+                        alert('Vui lòng nhập nội dung tìm kiếm!');
+                    }
+                });
+            </script>
             <span>Phổ biến: UI Designer, UX Researcher, Androi, Admin</span>
         </div>
     </div>
@@ -82,7 +104,7 @@
         <div class="homepage-explore-container">
             <div class="headline-homepage-explore">
                 <h2>Khám phá theo <span>danh mục</span></h2>
-                <a href="#">
+                <a href="<?php echo BASE_URL; ?>searchjob/searchjob/industry=,pr=,type=,level=,search=?">
                     <p>Hiển thị tất cả công việc</p>    
                     <ion-icon name="arrow-forward-outline"></ion-icon>
                 </a>
@@ -95,7 +117,7 @@
                         if (isset($industries) && !empty($industries)) {
                             foreach ($industries as $industry) {
                     ?>
-                                <a href="#">
+                                <a href="<?php echo BASE_URL; ?>searchjob/searchjob/industry=<?php echo $industry['industry_id']; ?> ,pr=,type=,level=,search=?">
                                     <div class="icon">
                                         <i class="fa-solid fa-list"></i>
                                     </div>
@@ -136,47 +158,52 @@
     </div>
 
     <div class="lastest-jobs">
-        <div class="lastest-jobs-container">
-            <div class="headline">
-                <h2>Những công việc <span>mới nhất</span></h2>
-                <a href="#">
-                    <p>Hiển thị tất cả</p>
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                </a>
-            </div>
-            <div class="content">
+    <div class="lastest-jobs-container">
+        <div class="headline">
+            <h2>Những công việc <span>mới nhất</span></h2>
+            <a href="<?php echo BASE_URL; ?>searchjob/searchjob/industry=,pr=,type=,level=,search=?">
+                <p>Hiển thị tất cả công việc</p>
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+            </a>
+        </div>
+        <div class="content">
             <?php if (!empty($getJobs)): ?>
-                <?php foreach ($getJobs as $job): ?>
-                    <a href="<?php echo BASE_URL; ?>jobDescription?job_id=<?php echo $job['job_id']; ?>" class="job-card">
-                        <div class="job-logo">
-                            <img src="public/img/<?php echo $job['comp_logo']; ?>" alt="Logo">
-                        </div>
-
-                        <div class="infor-job-card">
-                            <h3><?php echo $job['job_title']; ?></h3>
-                            <p><?php echo $job['comp_name']; ?> 
-                                <span>• <?php echo isset($job['comp_address']) ? $job['comp_address'] : 'Chưa xác định'; ?></span>
-                            </p>
-                            <div class="job-tags">
-                                <!-- <span class="tag-part-time">Part-Time</span> -->
-                                 
-                                <?php if ($job['job_type_name'] == 'fulltime'): ?>
-                                    <span class="tag-full-time"><?php echo $job['job_type_name']; ?> </span>
-                                <?php elseif ($job['job_type_name'] == 'parttime'): ?>
-                                    <span class="tag-part-time"><?php echo $job['job_type_name']; ?> </span>
-                                <?php else: ?>
-                                    <span class="tag-internship"><?php echo $job['job_type_name']; ?> </span>
-                                    <?php endif; ?>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No new jobs found.</p>
-            <?php endif; ?>
+    <?php foreach ($getJobs as $job): ?>
+        <a href="<?php 
+            echo BASE_URL; 
+            echo "jobDescription?job_id=" . $job['job_id']; 
+            if (isset($_SESSION['current']['user_id'])) {
+                echo "&user_id=" . $_SESSION['current']['user_id']; 
+            } 
+        ?>" class="job-card">
+            <div class="job-logo">
+                <img src="<?php echo $job['comp_logo']; ?>" alt="Logo">
             </div>
+
+            <div class="infor-job-card">
+                <h3><?php echo $job['job_title']; ?></h3>
+                <p><?php echo $job['comp_name']; ?> 
+                    <span>• <?php echo isset($job['comp_address']) ? $job['comp_address'] : 'Chưa xác định'; ?></span>
+                </p>
+                <div class="job-tags">
+                    <?php if ($job['job_type_name'] == 'Fulltime'): ?>
+                        <span class="tag-full-time"><?php echo $job['job_type_name']; ?> </span>
+                    <?php elseif ($job['job_type_name'] == 'Parttime'): ?>
+                        <span class="tag-part-time"><?php echo $job['job_type_name']; ?> </span>
+                    <?php else: ?>
+                        <span class="tag-internship"><?php echo $job['job_type_name']; ?> </span>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </a>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>No new jobs found.</p>
+<?php endif; ?>
+
         </div>
     </div>
+</div>
 
     <!-- Footer -->
     <div class="footer">
@@ -222,8 +249,7 @@
             </div>
         </div>
     </div>
-
-<script>
+    <script>
     const loginBtn = document.getElementById('btn-login');
     const registerBtn = document.getElementById('btn-register');
     loginBtn.addEventListener('click', function () {
