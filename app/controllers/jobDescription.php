@@ -52,74 +52,66 @@ class jobDescription extends DController {
 
     // Phương thức xử lý việc nộp đơn ứng tuyển
     public function submitApplication() {
-        session_start();
-        // Kiểm tra nếu user_id và job_id có trong URL
-        if (!isset($_SESSION['current']['user_id'])) {
-            echo "Vui lòng đăng nhập và chọn công việc để ứng tuyển!";
-            exit();
-        }
+        // Kiểm tra form submission và các giá trị cần thiết
+        if (isset($_POST['submit_application']) && isset($_POST['job_id']) && isset($_POST['user_id'])) {
+            $job_id = $_POST['job_id'];  // Lấy job_id từ POST
+            $user_id = $_POST['user_id'];  // Lấy user_id từ POST
+            $apply_at = date('Y-m-d');  // Lấy ngày nộp đơn
     
-        // $job_id = $_GET['job_id'];
-        $user_id = $_SESSION['current']['user_id'];  // Lấy user_id từ session
+            // Kiểm tra và xử lý tệp đính kèm
+            if (isset($_FILES['cv_file']) && $_FILES['cv_file']['error'] == 0) {
+                $cv_file = $_FILES['cv_file'];
+                $allowed_ext = 'pdf';
+                $file_extension = pathinfo($cv_file['name'], PATHINFO_EXTENSION);
     
-        // Kiểm tra nếu người dùng chưa đăng nhập
-        if (!isset($_SESSION['current']) || $_SESSION['current']['user_id'] != $user_id) {
-            echo "Vui lòng đăng nhập và chọn công việc để ứng tuyển!";
-            exit();
-        }
+                // Kiểm tra định dạng tệp
+                if ($file_extension !== $allowed_ext) {
+                    $data['message'] = 'Chỉ hỗ trợ tệp PDF!';
+                    $this->load->view('job_description', $data);  // Trả về trang hiện tại với thông báo
+                    return;
+                }
     
-        // Kiểm tra nếu có file CV được tải lên và nó có đúng định dạng PDF
-        if (isset($_FILES['cv_file']) && $_FILES['cv_file']['type'] == 'application/pdf') {
-            $cvFile = $_FILES['cv_file'];
+                // Tạo tên file mới bằng cách thêm user_id vào trước tên file
+                $original_file_name = basename($cv_file['name']);  // Lấy tên file gốc
+                $file_name = $user_id . '_' . $original_file_name;  // Tạo tên file mới
     
-            // Xác định thư mục lưu trữ file CV
-            $uploadDir = 'public/img/';
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);  // Tạo thư mục nếu chưa tồn tại
-            }
+                // Đường dẫn lưu trữ file
+                $upload_dir = 'uploads/cvs/';
     
-            // Đặt tên cho file dựa trên ID người dùng và thời gian để tránh trùng lặp
-            $fileName = 'cv_' . $user_id . '_' . time() . '.pdf';
-            $filePath = $uploadDir . $fileName;
+                // Kiểm tra và tạo thư mục nếu chưa tồn tại
+                if (!is_dir($upload_dir)) {
+                    mkdir($upload_dir, 0755, true);
+                }
+   
+                $file_path = $upload_dir . $file_name;
+
     
-            // Di chuyển file từ thư mục tạm vào thư mục lưu trữ
-            if (move_uploaded_file($cvFile['tmp_name'], $filePath)) {
-                // Nếu file tải lên thành công, lưu thông tin vào cơ sở dữ liệu
+                // Di chuyển file tạm thời vào thư mục uploads
+                if (move_uploaded_file($cv_file['tmp_name'], $file_path)) {
+                    // Lưu thông tin đơn ứng tuyển vào cơ sở dữ liệu
+                    $applicationModel = $this->load->model('applicationModel');
+                    $result = $applicationModel->saveApplication($user_id, $job_id, $file_path, $apply_at);
     
-                // Load model ApplicationModel để lưu đơn ứng tuyển
-                $applicationModel = $this->load->model('applicationModel');
-    
-                // Chuẩn bị dữ liệu cần lưu vào bảng applications
-                $data = [
-                    'user_id' => $user_id,
-                    // 'job_id' => $job_id,
-                    'apply_at' => date('Y-m-d'),  // Lấy ngày hiện tại
-                    'application_status' => 'pending',  // Mặc định là 'pending'
-                    'cv' => $fileName  // Lưu tên file CV đã tải lên
-                ];
-    
-                // Lưu đơn ứng tuyển vào cơ sở dữ liệu
-                $isCreated = $applicationModel->createApplication($data);
-    
-                if ($isCreated) {
-                    // Đơn ứng tuyển đã được nộp thành công, chuyển hướng đến trang hồ sơ ứng tuyển
-                    header('Location: ' . BASE_URL . '/myApplications');
-                    exit();
+                    if ($result) {
+                        // Thành công, thông báo và quay lại trang công việc
+                        $data['message'] = 'Đơn ứng tuyển của bạn đã được gửi thành công!';
+                    } else {
+                        $data['message'] = 'Có lỗi xảy ra, vui lòng thử lại!';
+                    }
                 } else {
-                    // Thông báo lỗi nếu không thể lưu vào cơ sở dữ liệu
-                    echo "Có lỗi khi nộp đơn. Vui lòng thử lại!";
-                    exit();
+                    $data['message'] = 'Không thể tải lên tệp CV!';
                 }
             } else {
-                // Thông báo lỗi nếu không thể tải lên file CV
-                echo "Có lỗi khi tải lên file CV. Vui lòng thử lại!";
-                exit();
+                $data['message'] = 'Vui lòng đính kèm tệp CV!';
             }
         } else {
-            // Nếu không có file CV hoặc file không phải định dạng PDF
-            echo "Vui lòng tải lên file CV dưới dạng PDF.";
-            exit();
+            $data['message'] = 'Vui lòng đăng nhập và thử lại!';
         }
+        echo addslashes($data['message']);
+        // Quay lại trang công việc với job_id và user_id trong URL
+        $url = BASE_URL . 'jobDescription?job_id=' . $job_id . '&user_id=' . $user_id;
+        header('Location: ' . $url);  // Chuyển hướng về trang công việc
+        exit();
     }
 }
 ?>

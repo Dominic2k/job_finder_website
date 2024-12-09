@@ -17,44 +17,19 @@ class applicationModel extends DModel {
         $data = [':user_id' => $user_id];
         return $this->db->select($sql, $data); // 
     }
-    public function getApplicationsByUser($user_id) {
-        $sql = "SELECT * FROM applications WHERE user_id = :user_id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function createApplication($data) {
-        // Lưu thông tin vào bảng applications
-        $query = "INSERT INTO applications (user_id, job_id, apply_at, application_status, cv) 
-                  VALUES (:user_id, :job_id, :apply_at, :application_status, :cv)";
-        
-        $params = [
-            'user_id' => $data['user_id'],
-            'job_id' => $data['job_id'],
-            'apply_at' => $data['apply_at'],
-            'application_status' => $data['application_status'],
-            'cv' => $data['cv']
-        ];
+    public function saveApplication($user_id, $job_id, $cv_file, $apply_at) {
+        // Dữ liệu cần thêm vào bảng applications
 
-        // Thực thi câu lệnh SQL và trả về true nếu thành công
-        $result = $this->db->insert($query, $params);
-
-        return $result;
-    }
-    public function updateApplicationStatus($application_id, $status) {
-        $db = $this->db;
-        
-        // Cập nhật trạng thái
-        $query = "UPDATE applications SET application_status = :application_status WHERE application_id = :application_id";
-        
-        // Dữ liệu đầu vào
         $data = [
-            ':application_status' => $status,
-            ':application_id' => $application_id
+            'user_id' => $user_id,
+            'job_id' => $job_id,
+            'apply_at' => $apply_at,
+            'application_status' => 'pending', // Mặc định trạng thái là 'pending'
+            'cv' => $cv_file
         ];
 
-        return $db->select($query, $data); // Thực thi câu lệnh UPDATE
+        // Gọi phương thức insert từ lớp Database để thêm đơn ứng tuyển vào bảng applications
+        return $this->db->insert('applications', $data);
     }
 
     public function updateStatusApplication($table_applications, $data, $condition) {

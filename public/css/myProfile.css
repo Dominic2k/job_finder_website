@@ -144,24 +144,24 @@ body {
 }
 
 .intro-content-myProfile {
-    padding-left: 50px;
+    padding: 15px 0 15px 50px;
     /* border-bottom: 1px solid #D6DDEB; */
 }
 
 .intro-content-myProfile h4 {
-    font-size: 17px;
+    font-size: 20px;
     margin-top: 20px;
     margin-bottom: 0px;
 }
 
 .intro-content-myProfile  p {
-    font-size: 15px;
+    font-size: 17px;
     color:rgb(84, 84, 82);
     margin-top: 10px;
 }
 
 .underline {
-    width: 1127px;
+    width: 1520px;
     /* height: 1px; */
     border-bottom: 1px solid #D6DDEB;
     background-color:#D6DDEB;
@@ -171,7 +171,7 @@ body {
 .avatar-content-myProfile {
     display: flex;
     align-items: center;
-    gap: 90px;
+    gap: 150px;
     padding: 25px 50px;
     /* border-bottom: 1px solid #D6DDEB; */
 }
@@ -181,13 +181,13 @@ body {
 }
 
 .left-avatar-content-myProfile h4 {
-    font-size: 17px;
+    font-size: 20px;
     margin-top: 20px;
     margin-bottom: 0px;
 }
 
 .left-avatar-content-myProfile p {
-    font-size: 15px;
+    font-size: 17px;
     color:rgb(84, 84, 82);
     margin-top: 10px;
 }
@@ -198,9 +198,9 @@ body {
 
 .middle-avatar-content-myProfile img {
     object-fit: cover;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
 }
 
 .right-avatar-content-myProfile {
@@ -224,7 +224,7 @@ body {
 }
 
 .left-personal-info-content-myProfile h4 {
-    font-size: 17px;
+    font-size: 20px;
     margin-top: 20px;
     margin-bottom: 0px;
 }
@@ -255,8 +255,10 @@ body {
 }
 
 .right-personal-info-content-myProfile #fullname {
+    font-size: 17px;
+    padding-left: 10px;
     width: 493px;
-    height: 30px;
+    height: 50px;
 }
 
 .name::after, .phone::after, .email::after, .birthday::after, .gender::after {
@@ -267,18 +269,24 @@ body {
 }
 
 .right-personal-info-content-myProfile #phone {
+    font-size: 17px;
+    padding-left: 10px;
     width: 180px;
-    height: 30px;
+    height: 50px;
 }
 
 .right-personal-info-content-myProfile #email {
+    font-size: 17px;
+    padding-left: 10px;
     width: 250px;
-    height: 30px;
+    height: 50px;
 }
 
 .right-personal-info-content-myProfile #birthday{
+    font-size: 17px;
+    padding-left: 10px;
     width: 180px;
-    height: 35px;
+    height: 53px;
 }
 
 input[type="date"] {
@@ -288,8 +296,10 @@ input[type="date"] {
 }
 
 .right-personal-info-content-myProfile #gender{
+    font-size: 17px;
+    padding-left: 10px;
     width: 257px;
-    height: 38.2px;
+    height: 53px;
 }
 
 select {
