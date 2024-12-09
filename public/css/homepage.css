@@ -33,8 +33,11 @@ body {
     left: 100px;
 }
 
-.job-header-container .nameWebsite {
+.logo-job-header .nameWebsite {
     position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
     top: 22px;
     left: 155px;
     font-size: 26px;
@@ -247,7 +250,7 @@ body {
 
 .headline-homepage-explore a {
     color: #4640DE;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -449,7 +452,7 @@ body {
 
 .lastest-jobs-container .headline a {
     color: #4640DE;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;

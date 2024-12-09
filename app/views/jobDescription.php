@@ -16,13 +16,13 @@
     <!-- Header -->
     <div class="job-header">
         <a class="WebFunny" href="<?php echo BASE_URL; ?>">
-            <img src="public/img/logoWebsite.jpg" alt="JobFunny">
-            <span>JobFunny</span>
+            <img src="public/img/logo_web.jpg" alt="JobFunny">
+            <span>JobEverlight</span>
 
         </a>
 
-        <a class="findJobs href="#">Tìm việc</a>
-
+        <a class="a1" href="http://localhost/job_finder_website/searchjob/searchjob/industry=,pr=,type=,level=,search=">Tìm việc</a>
+        <a class="a2" href="http://localhost/job_finder_website/searchcompany/searchcompany/industry=,size=,search=">Duyệt các công ty</a>
         <!-- <div class="auth-buttons">
             <button class="btn-login">Đăng nhập</button>
             <button class="btn-register">Đăng ký</button>
@@ -259,19 +259,21 @@
 
         <!-- Thông tin cá nhân và form nộp đơn -->
         <div class="info-personal-myApplicationDetail">
-        <form action="<?php echo BASE_URL . 'jobDescription/submitApplication'; ?>" method="POST" enctype="multipart/form-data" name="myApplyForm" class="rg-applyform">
+        <form action="<?php echo BASE_URL . 'jobDescription/submitApplication'; ?>" method="POST" enctype="multipart/form-data">
     <!-- Các trường thông tin cá nhân -->
     <div class="info-personal">
         <h4 class="full_name">Họ và tên</h4>
-        <input type="text" class="fullname" placeholder="Nhập họ và tên" value="<?php echo htmlspecialchars($data['user_info']['full_name']); ?>" readonly>
+        <input type="text" class="fullname" value="<?php echo htmlspecialchars($data['user_info']['full_name']); ?>" readonly>
     </div>
+
     <div class="info-personal">
         <h4 class="email">Email</h4>
-        <input type="text" class="email" placeholder="Nhập email" value="<?php echo htmlspecialchars($data['user_info']['email']); ?>" readonly>
+        <input type="text" class="email" value="<?php echo htmlspecialchars($data['user_info']['email']); ?>" readonly>
     </div>
+
     <div class="info-personal">
         <h4 class="phone">Số điện thoại</h4>
-        <input type="text" class="phoneNumber" placeholder="Nhập số điện thoại" value="<?php echo htmlspecialchars($data['user_info']['phone']); ?>" readonly>
+        <input type="text" class="phoneNumber" value="<?php echo htmlspecialchars($data['user_info']['phone']); ?>" readonly>
     </div>
 
     <!-- Đính kèm CV -->
@@ -284,7 +286,7 @@
         </div>
     </div>
 
-    <!-- Trường ẩn chứa job_id và user_id -->
+    <!-- Các trường ẩn chứa job_id và user_id -->
     <input type="hidden" name="job_id" value="<?php echo $data['job']['job_id']; ?>">
     <input type="hidden" name="user_id" value="<?php echo $data['user_info']['user_id']; ?>">
 
@@ -296,16 +298,16 @@
     <p>By sending the request you can confirm that you accept our Terms of Service and Privacy Policy</p>
 </form>
 
-            <?php
-                // Nếu có thông báo thành công hoặc lỗi, hiển thị nó trực tiếp
-                if (isset($data['message'])) {
-                    echo '<div class="message">' . $data['message'] . '</div>';
-                }
-            ?>
+<?php if (isset($data['message'])): ?>
+    <div class="notification">
+        <script>
+            alert("<?php echo addslashes($data['message']); ?>");
+        </script>
+    </div>
+<?php endif; ?>
         </div>
     </div>
 </div>
-
 <script>
     // Lắng nghe sự kiện khi nút "Nộp" được nhấn
     document.getElementById('applyBtn').addEventListener('click', function() {

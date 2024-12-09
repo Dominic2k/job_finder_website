@@ -12,7 +12,7 @@
 <div class="container-myProfile">
         <div class="sidebar">
             <div class="top-sidebar">
-                <a href="<?php echo BASE_URL; ?>" style="text-decoration: none; color: black;"><h3>JobFunny</h3></a>
+                <a href="<?php echo BASE_URL; ?>" style="text-decoration: none; color: black;"><h3>JobEverlight</h3></a>
                 
                 <ul>
                     <!-- <li><a href="#"><i style="padding-left: 10px;" class="fa-solid fa-house"></i> Trang chủ</a></li>
