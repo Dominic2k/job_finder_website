@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -532,6 +533,7 @@ include_once 'app/views/header.php';
         })
         .catch(error => console.error('Fetch error:', error));
     }
+    var user_idc=<?php echo(isset($_SESSION['current'])?$_SESSION['current']['user_id']: "0"); ?>;
     //Hàm hiển trang hiển thị card job
     function displayCompanies(job){
         var liJob=job;
@@ -581,7 +583,7 @@ include_once 'app/views/header.php';
                         </div> 
                     </div><!--Part1-->
                     <div class="applyJob">
-                        <button>nộp</button>
+                        <button><a style="color:white;" href="http://localhost/job_finder_website/jobDescription?job_id=${job.job_id}&user_id=${user_idc}">Chi tiết</a></button>
                         <p>${job.job_total_applied}|${job.job_required_candidates}</p>
                     </div>
                 </div>
