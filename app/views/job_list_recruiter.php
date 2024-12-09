@@ -43,7 +43,7 @@
 
                         <tr>
                             <td class="job-title"><a title="Xem chi tiết" href="http://localhost/job_finder_website/recruiter/jobbyid/?id=<?php echo $value['job_id']; ?>"><?php echo $value['job_title']; ?></a></td>
-                            <td><span class="badge <?php echo $statusClass; ?> "><?php echo ucwords($value['job_status']); ?></span></td>
+                            <td><span class="badge <?php echo $statusClass; ?> " onclick="window.location.href = 'http://localhost/job_finder_website/jobController/updateStatusJob?id=<?php echo $value['job_id']; ?>&status=<?php echo $value['job_status']; ?>'"><?php echo ucwords($value['job_status']); ?></span></td>
                             <td><?php echo $value['job_posted_date']; ?></td>
                             <td><?php echo $value['job_deadline']; ?></td>
                             <td><span class="badge <?php echo $job_type ?>"><?php echo $value['Job_Type']; ?></span></td>

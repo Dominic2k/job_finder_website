@@ -21,6 +21,7 @@
     }
     .covere{
         padding: 20px 2%;
+        padding-top:70px;
     }
     .header {
     text-align: center;
@@ -125,9 +126,11 @@
         align-items: center;
         background-color: #fff;
     }
+
     .job-logo {
     width: 60px;
     height: 60px;
+    margin-right: 20px;
     }
 
     .job-info {
@@ -215,11 +218,30 @@
         border:none;
         border-bottom:1px solid gray;
     }
+    .breadcrumb {
+    background-color: transparent;
+    font-size: 16px;
+    display:flex;
+    list-style-type:none;
+    }
+    .breadcrumb-item a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .breadcrumb-item a:hover {
+        text-decoration: underline;
+    }
+    .breadcrumb-item, .active {
+    font-weight: bold;
+    color: #007bff; /* Màu xanh lam */
+    }
 </style>
 <?php
 if(isset($data)&&$data){
     extract($data);
 }
+include_once 'app/views/header.php';
 ?>
 <div class="covere">
 <div class="header">
@@ -230,8 +252,13 @@ if(isset($data)&&$data){
         <button class="search-button" id="search-button">Tìm kiếm</button>
     </div>
 </div>
+<nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li style="margin-right:10px" class="breadcrumb-item"><a  href="http://localhost/job_finder_website/">Trang chủ</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Trang tìm kiếm công việc</li>
+        </ol>
+</nav>
 </div>
-
 <main class="main-content">
 <aside class="sidebar">
     <b>Ngành</b>
@@ -304,6 +331,7 @@ if(isset($data)&&$data){
         <?php if(!empty($array_filter) && $array_filter):?>
             <?php extract($array_filter);  ?>
         object=
+
         {
             a: <?php echo json_encode(!empty($industry) ? explode('a2x', $industry) : []); ?>,
             b: <?php echo json_encode(!empty($type) ? explode('a2x', $type) : []); ?>,
@@ -314,6 +342,7 @@ if(isset($data)&&$data){
         sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php else: ?>
             object={ a:[],b:[],c:[],d:[],e:null};
+
             sessionStorage.setItem('filter_jobs', JSON.stringify(object));
         <?php endif ;?>
     }
@@ -538,7 +567,7 @@ if(isset($data)&&$data){
                 `
                 <div class="job-card">
                     <div class="cardJob-part1">
-                        <img src="stripe-logo.png" alt="Stripe" class="company-logo">
+                        <img class='job-logo' src="../../public/img/${comA.comp_logo}" alt="Stripe" class="company-logo">
                         <div class="company-info">
                             <div>
                                 <h3>${job.job_title}</h3>

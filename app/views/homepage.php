@@ -33,8 +33,9 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
     <div class="job-header">
         <div class="job-header-container">
             <div class="logo-job-header">
-                <img class="logoWebsite" src="public/img/z6107860220976_d333a54ce58d884684ec9fcfc7ddcf02.jpg" alt="Stripe">
-                <span class="nameWebsite">JobFunny</span>
+
+                <img class="logoWebsite" src="public/img/logo_web.jpg" alt="Stripe">
+                <span>JobEverlight</span>
                 <a class="a1" href="http://localhost/job_finder_website/searchjob/searchjob/industry=,pr=,type=,level=,search=">Tìm việc</a>
                 <a class="a2" href="http://localhost/job_finder_website/searchcompany/searchcompany/industry=,size=,search=">Duyệt các công ty</a>
     </div>

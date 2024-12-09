@@ -36,6 +36,7 @@
         align-items:center;
         background-color:white;
         padding-top:50px;
+        position:relative;
     }
     .rg-mainPart{
         width:60%;
@@ -150,12 +151,39 @@
     .text-green{
         color:blue !important;
     }
+    .breadcrumb {
+    background-color: transparent;
+    font-size: 16px;
+    display:flex;
+    list-style-type:none;
+    position:absolute;
+    top:0;
+    left:0
+    }
+    .breadcrumb-item a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .breadcrumb-item a:hover {
+        text-decoration: underline;
+    }
+    .breadcrumb-item, .active {
+    font-weight: bold;
+    color: #007bff;
+    }
 </style>
 <div class="rg-parent">
     <div class="rg-left">
         
     </div>
     <div class="rg-right  rg-oMainPart">
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li style="margin-right:10px" class="breadcrumb-item"><a  href="http://localhost/job_finder_website/">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Trang đăng nhập</li>
+                </ol>
+        </nav>
         <div class="rg-mainPart">
             <form action="?url=login/login" method="POST" name="myForm" class="rg-form">
                 <h1>Đăng Nhập</h1>
@@ -169,7 +197,8 @@
                 </div>
                 <button type="submit" class="rg-button1" name="logIn">Đăng Nhập</button>
             </form>
-            <div class="rg-field1">Bạn chưa có tài khoản? &nbsp<a href="http://localhost/job_finder_website/register/registerUser" >Đăng ký</a></div>
+            <div style="margin-bottom:0;" class="rg-field1">Bạn chưa có tài khoản? &nbsp<a href="http://localhost/job_finder_website/register/registerUser" >Đăng ký</a></div>
+            <div style="margin-top:5px;" class="rg-field1">Bạn quên mật khẩu? &nbsp<a href="http://localhost/job_finder_website/forget/forget" >Tạo mật khẩu mới</a></div>
         </div><!--body right-->
     </div><!-- rg-right-->
 </div><!--container-->

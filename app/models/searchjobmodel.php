@@ -58,6 +58,7 @@
             return $this->db->select($sql,$data);
         }
         public function getjobs($parameter = []){
+
             if (!empty($parameter)) {
                 extract($parameter);
                 $condi = "";

@@ -61,14 +61,34 @@ body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 20px;
+    position: relative;
 }
 
 .sidebar .logo {
     font-size: 20px;
     font-weight: bold;
     color: #000;
+    position: fixed;
+    top: 16px;
+}
+
+.sidebar .logo img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.sidebar .logo span {
+    position: absolute;
+    left: 130%;
+    top: 25%;
+}
+
+.sidebar .menu {
+    position: fixed;
+    top: 50px;
 }
 
 .sidebar .menu ul {
@@ -109,8 +129,10 @@ body {
 }
 
 .logout {
-    margin-top: auto;
+    /* margin-top: auto; */
     text-align: center;
+    position: fixed;
+    top: 700px;
 }
 
 .logout button {
@@ -455,6 +477,7 @@ textarea {
     font-weight: bold;
     text-align: center;
     background-color: transparent;
+    cursor: pointer;
 }
 
 
@@ -700,7 +723,10 @@ textarea {
 }
 
 .back-to-home {
-    margin-top: 26px;
+    margin-top: 50px;
+    position: fixed;
+    top: 42px;
+    left: 24px;
 }
 
 .btn-view-application {

@@ -17,6 +17,7 @@ class register extends DController{
                     unset($_POST['register1']);
                     break;
                 }else{
+                    
                 }
             }
             //Nếu tồ tại nghĩa là email không trùng

@@ -57,5 +57,29 @@ class applicationModel extends DModel {
 
         return $db->select($query, $data); // Thực thi câu lệnh UPDATE
     }
+
+    public function updateStatusApplication($table_applications, $data, $condition) {
+        return $this->db->update($table_applications, $data, $condition);
+    }
+
+
+    public function getApplicationInfo($application_id) {
+        $sql = "SELECT 
+                u.full_name AS fullname,
+                u.email AS email,
+                j.job_title,
+                j.job_location
+
+            FROM 
+                applications a
+            JOIN 
+                users u ON a.user_id = u.user_id
+            JOIN 
+                jobs j ON a.job_id = j.job_id
+            WHERE 
+                a.application_id = :application_id;";
+        $data = [':application_id' => $application_id];
+        return $this->db->select($sql, $data);
+    }
+
 }
-?>
