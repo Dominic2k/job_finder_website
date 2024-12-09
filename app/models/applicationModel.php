@@ -42,7 +42,6 @@ class applicationModel extends DModel {
 
         return $result;
     }
-    // Hàm cập nhật trạng thái đơn ứng tuyển
     public function updateApplicationStatus($application_id, $status) {
         $db = $this->db;
         
@@ -62,7 +61,6 @@ class applicationModel extends DModel {
         return $this->db->update($table_applications, $data, $condition);
     }
 
-
     public function getApplicationInfo($application_id) {
         $sql = "SELECT 
                 u.full_name AS fullname,
@@ -80,6 +78,10 @@ class applicationModel extends DModel {
                 a.application_id = :application_id;";
         $data = [':application_id' => $application_id];
         return $this->db->select($sql, $data);
+    }
+
+    public function applyNewJob($table_applications, $data) {
+        return $this->db->insertApplication($table_applications, $data);
     }
 
 }

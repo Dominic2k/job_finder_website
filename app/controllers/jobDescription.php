@@ -1,6 +1,6 @@
 <?php
 // app/controllers/jobDescription.php
-session_start();
+// session_start();
 
 class jobDescription extends DController {
 
@@ -9,7 +9,7 @@ class jobDescription extends DController {
     }
 
     public function index() {
-        // session_start(); // Gọi session_start() tại đây để sử dụng $_SESSION
+        session_start(); // Gọi session_start() tại đây để sử dụng $_SESSION
 
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (isset($_SESSION['current']) && !empty($_SESSION['current']['user_id'])) {
@@ -52,13 +52,14 @@ class jobDescription extends DController {
 
     // Phương thức xử lý việc nộp đơn ứng tuyển
     public function submitApplication() {
+        session_start();
         // Kiểm tra nếu user_id và job_id có trong URL
-        if (!isset($_GET['job_id']) || !isset($_SESSION['current']['user_id'])) {
+        if (!isset($_SESSION['current']['user_id'])) {
             echo "Vui lòng đăng nhập và chọn công việc để ứng tuyển!";
             exit();
         }
     
-        $job_id = $_GET['job_id'];
+        // $job_id = $_GET['job_id'];
         $user_id = $_SESSION['current']['user_id'];  // Lấy user_id từ session
     
         // Kiểm tra nếu người dùng chưa đăng nhập
@@ -72,7 +73,7 @@ class jobDescription extends DController {
             $cvFile = $_FILES['cv_file'];
     
             // Xác định thư mục lưu trữ file CV
-            $uploadDir = 'public/';
+            $uploadDir = 'public/img/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);  // Tạo thư mục nếu chưa tồn tại
             }
@@ -91,7 +92,7 @@ class jobDescription extends DController {
                 // Chuẩn bị dữ liệu cần lưu vào bảng applications
                 $data = [
                     'user_id' => $user_id,
-                    'job_id' => $job_id,
+                    // 'job_id' => $job_id,
                     'apply_at' => date('Y-m-d'),  // Lấy ngày hiện tại
                     'application_status' => 'pending',  // Mặc định là 'pending'
                     'cv' => $fileName  // Lưu tên file CV đã tải lên
@@ -120,8 +121,5 @@ class jobDescription extends DController {
             exit();
         }
     }
-    
-    
-    
 }
 ?>

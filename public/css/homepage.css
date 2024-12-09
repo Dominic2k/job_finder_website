@@ -16,6 +16,12 @@ body {
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
+.logo-job-header span {
+    margin-left: 156px;
+    font-size: x-large;
+    font-weight: 600;
+}
+
 .job-header-container {
     height: 100%;
     display: flex;
@@ -88,7 +94,7 @@ body {
 }
 
 .auth-buttons .btn-login {
-    background-color: #ffe4af;
+    background-color: #4640de;
     padding: 0px 10px;
     cursor: pointer;
 }

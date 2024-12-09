@@ -16,8 +16,8 @@
     <!-- Header -->
     <div class="job-header">
         <a class="WebFunny" href="<?php echo BASE_URL; ?>">
-            <img src="public/img/logoWebsite.jpg" alt="JobFunny">
-            <span>JobFunny</span>
+            <img src="public/img/logo_web.jpg" alt="JobFunny">
+            <span>JobEverlight</span>
 
         </a>
 
@@ -249,7 +249,7 @@
     <div class="myApplicationDetail-small-container">
         <!-- Thông tin công việc -->
         <div class="info-job-myApplicationDetail">
-            <div class="job-logo"><img src="<?php echo $data['job']['comp_logo']; ?>" alt="logo_company"></div>
+            <div class="job-logo"><img src="../public/img/<?php echo $data['job']['comp_logo']; ?>" alt="logo_company"></div>
             
             <div class="infor-job-card">
                 <h3><?php echo $data['job']['job_title']; ?></h3>
@@ -259,7 +259,7 @@
 
         <!-- Thông tin cá nhân và form nộp đơn -->
         <div class="info-personal-myApplicationDetail">
-        <form action="<?php echo BASE_URL . 'jobDescription/submitApplication'; ?>" method="POST" enctype="multipart/form-data" name="myApplyForm" class="rg-applyform">
+        <form action="<?php echo BASE_URL . 'myApplications/applyNewJob'; ?>" method="POST" enctype="multipart/form-data" name="myApplyForm" class="rg-applyform">
     <!-- Các trường thông tin cá nhân -->
     <div class="info-personal">
         <h4 class="full_name">Họ và tên</h4>
@@ -294,7 +294,7 @@
     </div>
 
     <p>By sending the request you can confirm that you accept our Terms of Service and Privacy Policy</p>
-</form>
+        </form>
 
             <?php
                 // Nếu có thông báo thành công hoặc lỗi, hiển thị nó trực tiếp
