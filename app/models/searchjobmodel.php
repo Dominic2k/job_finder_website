@@ -118,7 +118,7 @@
                     } else if(!empty($pr[0]) && !empty($pr[1])){
                         $key1 = ":salary1";
                         $key2 = ":salary2";
-                        $condi .="job_salary BETWEEN $key1 AND $key2 ";
+                        $condi .="job_salary BETWEEN $key1 AND $key2 ".$or;
                         $data[$key1] = intval($pr[0]);
                         $data[$key2] = intval($pr[1]);
                     }

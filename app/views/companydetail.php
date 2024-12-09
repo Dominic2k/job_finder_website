@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,6 +114,7 @@
     .card_job{
         width: 49%;
         background:white;
+        padding-bottom:20px;
         padding-left:4%;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
@@ -323,7 +325,7 @@ include_once 'app/views/header.php';
                                 <img src="logo-placeholder.png" alt="Company Logo">
                             </div>
                             <div class="card__content">
-                                <a style="text-decoration: none;color:black;" href="http://localhost/job_finder_website/jobDescription?job_id=<?php echo($value['job_id']); ?>&user_id=<?php echo( isset($_SESSION['current']) ? $_SESSION['current']['user_id'] : 1 ) ;  ?> "><h3 > <?php echo htmlspecialchars($value['job_title']); ?></h3></a>
+                                <a style="text-decoration: none;color:black;" href="http://localhost/job_finder_website/jobDescription?job_id=<?php echo($value['job_id']); ?>&user_id=<?php echo( isset($_SESSION['current']) ? $_SESSION['current']['user_id'] : 0 ) ;  ?> "><h3 > <?php echo htmlspecialchars($value['job_title']); ?></h3></a>
                                 <p ><?php echo htmlspecialchars($value['job_location']); ?></p>
                                 <div class="card__tags">
                                 <span class="tag "><?php echo isset($ty) ? htmlspecialchars($ty['job_type_name']) : 'N/A'; ?></span>

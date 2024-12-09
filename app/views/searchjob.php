@@ -533,7 +533,7 @@ include_once 'app/views/header.php';
         })
         .catch(error => console.error('Fetch error:', error));
     }
-    var user_idc=<?php echo(isset($_SESSION['current'])?$_SESSION['current']['user_id']: "1"); ?>;
+    var user_idc=<?php echo(isset($_SESSION['current'])?$_SESSION['current']['user_id']: "0"); ?>;
     //Hàm hiển trang hiển thị card job
     function displayCompanies(job){
         var liJob=job;
