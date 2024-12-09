@@ -64,6 +64,9 @@
     padding: 0px 10px;
     cursor: pointer;
     border-radius:5px;
+    border:none;
+    width: 100px;
+    height: 40px;
 }
 .auth-buttons .btn-login a{
     color:white;
@@ -74,6 +77,9 @@
     background-color: #4640DE;
     cursor: pointer;
     border-radius:5px;
+    border:none;
+    width: 100px;
+    height: 40px;
 }
 a {
     text-decoration: none;
