@@ -5,6 +5,7 @@
 
 require 'email_config.php';
 
+
 class myApplications extends DController {
     public function __construct() {
         parent::__construct();

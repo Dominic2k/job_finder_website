@@ -39,6 +39,10 @@
         height:120px;
         border:1px solid black;
     }
+    .logo-company img{
+        width: 100%;
+        height:100%;
+    }
     .banber-info{
         flex:1;
         padding-left:20px;
@@ -124,6 +128,10 @@
         object-fit: contain;
         margin-right: 16px;
     }
+    .card__logo img{
+        width: 100%;
+        height: 100%;
+    }
     .card__content {
         flex: 1;
     }
@@ -197,7 +205,7 @@ include_once 'app/views/header.php';
     </nav>
     <div class="banner-company">
         <div class="logo-company">
-            <img src="" alt="Logo">
+            <img src="../../public/img/<?php if(isset($company)){echo($company[0]['comp_logo']);} ?>" alt="Logo">
         </div>
         <div class="banber-info">
             <div class="b-row">
@@ -322,7 +330,7 @@ include_once 'app/views/header.php';
                     ?>
                         <div class="b-row card_job" data-display="<?php if($index>3){ echo(2);}else{echo(1);}?>">
                             <div class="card__logo">
-                                <img src="logo-placeholder.png" alt="Company Logo">
+                                <img src="../../public/img/<?php if(isset($company)){echo($company[0]['comp_logo']);} ?>" alt="Company Logo">
                             </div>
                             <div class="card__content">
                                 <a style="text-decoration: none;color:black;" href="http://localhost/job_finder_website/jobDescription?job_id=<?php echo($value['job_id']); ?>&user_id=<?php echo( isset($_SESSION['current']) ? $_SESSION['current']['user_id'] : 0 ) ;  ?> "><h3 > <?php echo htmlspecialchars($value['job_title']); ?></h3></a>

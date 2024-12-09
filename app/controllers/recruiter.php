@@ -209,16 +209,16 @@ class recruiter extends DController{
         $user_id = $_POST['user_id'];
     
         // Thư mục đích để lưu logo
-        $uploadDir = 'public/img/'; // Đảm bảo thư mục này tồn tại và có quyền ghi
+        // $uploadDir = ''; // Đảm bảo thư mục này tồn tại và có quyền ghi
     
         // Tạo tên file mới để tránh trùng lặp
-        $fileName = uniqid() . '-' . basename($comp_logo['name']);
-        $uploadPath = $uploadDir . $fileName;
+        $fileName = basename($comp_logo['name']);
+        $uploadPath = $fileName;
     
         // Kiểm tra và di chuyển file từ thư mục tạm
         if (move_uploaded_file($comp_logo['tmp_name'], $uploadPath)) {
             // Nếu thành công, lưu đường dẫn file vào cơ sở dữ liệu
-            $logoPath = $uploadPath;
+            $logoPath = $fileName;
         } else {
             die('Không thể lưu logo vào thư mục đích');
         }
