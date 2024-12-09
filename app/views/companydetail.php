@@ -323,7 +323,7 @@ include_once 'app/views/header.php';
                                 <img src="logo-placeholder.png" alt="Company Logo">
                             </div>
                             <div class="card__content">
-                                <h3 ><?php echo htmlspecialchars($value['job_title']); ?></h3>
+                                <a style="text-decoration: none;color:black;" href="http://localhost/job_finder_website/jobDescription?job_id=<?php echo($value['job_id']); ?>&user_id=<?php echo( isset($_SESSION['current']) ? $_SESSION['current']['user_id'] : 1 ) ;  ?> "><h3 > <?php echo htmlspecialchars($value['job_title']); ?></h3></a>
                                 <p ><?php echo htmlspecialchars($value['job_location']); ?></p>
                                 <div class="card__tags">
                                 <span class="tag "><?php echo isset($ty) ? htmlspecialchars($ty['job_type_name']) : 'N/A'; ?></span>

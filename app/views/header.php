@@ -28,7 +28,7 @@
 
 .job-header-container span {
     position: absolute;
-    top: 22px;
+    top: 15px;
     left: 155px;
     font-size: 26px;
     font-weight: bold;
@@ -36,7 +36,7 @@
 
 .job-header-container .a1 {
     position: absolute;
-    top: 27px;
+    top: 23px;
     left: 345px;
     font-size: 16px;
     text-decoration: none;
@@ -44,7 +44,7 @@
 }
 .job-header-container .a2 {
     position: absolute;
-    top: 27px;
+    top: 23px;
     left: 445px;
     font-size: 16px;
     text-decoration: none;
@@ -78,7 +78,7 @@
 <div class="job-header">
         <div class="job-header-container">
             <div class="logo-job-header">
-                <img src="../../public/img/logo_web.jpg" alt="Stripe">
+                <a href="http://localhost/job_finder_website"><img src="../../public/img/logo_web.jpg" alt="Stripe"></a>
                 <span>JobEverlight</span>
                 <a class="a1" href="http://localhost/job_finder_website/searchjob/searchjob/industry=,pr=,type=,level=,search=">Tìm việc</a>
                 <a class="a2" href="http://localhost/job_finder_website/searchcompany/searchcompany/industry=,size=,search=">Duyệt các công ty</a>
