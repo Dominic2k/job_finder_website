@@ -1,7 +1,7 @@
 <?php
 // app/controllers/HomeController.php
 
-session_start();
+// session_start();
 
 require 'email_config.php';
 
@@ -11,6 +11,7 @@ class myApplications extends DController {
     }
 
     public function index() {
+        session_start();
         $profileModel = $this->load->model('profileModel');
         $applicationModel = $this->load->model('applicationModel');
 
@@ -24,7 +25,6 @@ class myApplications extends DController {
 
         $this->load->view('myApplications', $data); // Truyền dữ liệu sang view
     }
-
 
     public function updateStatusApplication() {
         session_start();
@@ -89,4 +89,130 @@ class myApplications extends DController {
         header("Location: http://localhost/job_finder_website/recruiter/recruiter");
         exit();
     }
+
+    // public function applyNewJob() {
+    //     session_start();
+    //     $applicationmodel = $this->load->model('applicationModel');
+    //     $table_applications = 'applications';
+
+
+    //     if (isset($_SESSION['current']) && !empty($_SESSION['current']['user_id'])) {
+    //         $user_id = $_SESSION['current']['user_id']; // Lấy user_id từ session
+    //     } else {
+    //         // Nếu không có session, chuyển hướng đến trang login
+    //         header('Location: ' . BASE_URL . '/login');
+    //         exit();
+    //     }
+
+    //     if (isset($_POST['job_id'])) {
+    //         $job_id = $_POST['job_id'];
+    //     }
+            
+
+    //     if (!isset($_FILES['cv_file']) || $_FILES['cv_file']['error'] !== UPLOAD_ERR_OK) {
+    //         die('Lỗi tải lên logo hoặc không có logo được tải lên');
+    //     }
+    //     $cv = $_FILES['cv_file'];
+
+    //     $data = array(
+    //         'cv' => $cv,
+    //         'user_id' => $user_id,
+    //         'job_id' => $job_id
+    //     );
+
+    //     $result = $applicationmodel->applyNewJob($table_applications, $data);
+
+    //     if ($result == 1) {
+    //         $_SESSION['flash_message'] = [
+    //             'type' => 'success',
+    //             'message' => 'Thêm thành công!'
+    //         ];
+    //     } else {
+    //         $_SESSION['flash_message'] = [
+    //             'type' => 'error',
+    //             'message' => 'Thêm thất bại!'
+    //         ];
+    //     }
+        
+    //     header("Location: http://localhost/job_finder_website/");
+    //     exit();
+    // }
+
+    public function applyNewJob() {
+        session_start();
+        $applicationmodel = $this->load->model('applicationModel');
+        $table_applications = 'applications';
+    
+        // Kiểm tra session
+        if (isset($_SESSION['current']) && !empty($_SESSION['current']['user_id'])) {
+            $user_id = $_SESSION['current']['user_id'];
+        } else {
+            header('Location: ' . BASE_URL . '/login');
+            exit();
+        }
+    
+        // Lấy job_id
+        if (isset($_POST['job_id'])) {
+            $job_id = $_POST['job_id'];
+        } else {
+            die('Không có thông tin job_id.');
+        }
+    
+        // Kiểm tra file upload
+        if (!isset($_FILES['cv_file']) || $_FILES['cv_file']['error'] !== UPLOAD_ERR_OK) {
+            die('Lỗi tải lên CV hoặc không có CV được tải lên.');
+        }
+    
+        $cv = $_FILES['cv_file'];
+    
+        // Kiểm tra loại file và mở rộng
+        $allowedExtensions = ['pdf', 'doc', 'docx'];
+        $fileExtension = strtolower(pathinfo($cv['name'], PATHINFO_EXTENSION));
+        if (!in_array($fileExtension, $allowedExtensions)) {
+            die('Chỉ chấp nhận các file PDF, DOC, DOCX.');
+        }
+    
+        // Tạo tên file duy nhất
+        $newFileName = uniqid('cv_') . '.' . $fileExtension;
+    
+        // Đường dẫn lưu file
+        // $uploadDir = __DIR__ . '/uploads/cv/';
+        $uploadDir = __DIR__ . '../public/img/cv/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true); // Tạo thư mục nếu chưa tồn tại
+        }
+        $destination = $uploadDir . $newFileName;
+    
+        // Di chuyển file từ thư mục tạm
+        if (!move_uploaded_file($cv['tmp_name'], $destination)) {
+            die('Lỗi khi di chuyển file.');
+        }
+    
+        // Chuẩn bị dữ liệu lưu vào database
+        $data = array(
+            'cv' => $newFileName, // Lưu tên file mới
+            'user_id' => $user_id,
+            'job_id' => $job_id
+        );
+    
+        // Gọi model để thêm dữ liệu
+        $result = $applicationmodel->applyNewJob($table_applications, $data);
+    
+        // Xử lý kết quả
+        if ($result == 1) {
+            $_SESSION['flash_message'] = [
+                'type' => 'success',
+                'message' => 'Thêm thành công!'
+            ];
+        } else {
+            $_SESSION['flash_message'] = [
+                'type' => 'error',
+                'message' => 'Thêm thất bại!'
+            ];
+        }
+    
+        header("Location: " . BASE_URL);
+        exit();
+    }
+    
 }

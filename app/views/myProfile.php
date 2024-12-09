@@ -32,7 +32,7 @@
 
                 <div class="account-bottom-sidebar">
                     <div class="img-account">
-                        <img src="<?php echo isset($user['avatar']) ? BASE_URL . '/' . $user['avatar'] : ''; ?>" alt="avt-account">
+                        <img src="../public/img/<?php echo isset($user['avatar']) ? $user['avatar'] : ''; ?>" alt="avt-account">
                     </div>
 
                     <div class="info-account">
@@ -52,7 +52,7 @@
                 <div class="header-myProfile">
                     <h2>Hồ sơ của tôi</h2>
                     <a href="<?php echo BASE_URL; ?>" style="text-decoration: none;">
-                        <button>Quay lại trang chủ</button>
+                        <button class="back-to-home">Quay lại trang chủ</button>
                     </a>
                     
                 </div>
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="middle-avatar-content-myProfile">
-                            <img src="<?php echo isset($user['avatar']) ? BASE_URL . '/' . $user['avatar'] : ''; ?>" alt="avatar_account">
+                            <img src="../public/img/<?php echo isset($user['avatar']) ?  $user['avatar'] : ''; ?>" alt="avatar_account">
                         </div>
 
                         <div class="right-avatar-content-myProfile">

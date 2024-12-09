@@ -62,7 +62,7 @@
         <td class="applicant-name"><?php echo !empty($value['applicant_name']) ? $value['applicant_name'] : 'Chưa có thông tin'; ?></td>
         <td><span class="badge reviewing"><?php echo !empty($value['application_status']) ? $value['application_status'] : 'Chưa cập nhật'; ?></span></td>
         <td><?php echo !empty($value['application_date']) ? $value['application_date'] : 'Chưa có thông tin'; ?></td>
-        <td class=""><a class="btn-view-application" href="http://localhost/job_finder_website/recruiter/applicantbyid/?id=<?php echo !empty($value['application_id']) ? $value['application_id'] : '#'; ?>">Xem đơn ứng tuyển</a></td>
+        <td class=""><a class="btn-view-application" href="http://localhost/job_finder_website/recruiter/applicantbyid/?id=<?php echo !empty($value['application_id']) ? $value['application_id'] : ''; ?>">Xem đơn ứng tuyển</a></td>
     </tr>
     <?php 
         }

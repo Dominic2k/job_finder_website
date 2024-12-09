@@ -1,6 +1,7 @@
 <?php 
 
 class applicationModel extends DModel {
+
     public function __construct() {
         parent::__construct();
     }
@@ -16,7 +17,6 @@ class applicationModel extends DModel {
         $data = [':user_id' => $user_id];
         return $this->db->select($sql, $data); // 
     }
-
     public function saveApplication($user_id, $job_id, $cv_file, $apply_at) {
         // Dữ liệu cần thêm vào bảng applications
         $data = [
@@ -35,12 +35,14 @@ class applicationModel extends DModel {
         return $this->db->update($table_applications, $data, $condition);
     }
 
+
     public function getApplicationInfo($application_id) {
         $sql = "SELECT 
                 u.full_name AS fullname,
                 u.email AS email,
                 j.job_title,
                 j.job_location
+
             FROM 
                 applications a
             JOIN 
@@ -52,6 +54,5 @@ class applicationModel extends DModel {
         $data = [':application_id' => $application_id];
         return $this->db->select($sql, $data);
     }
-}
 
-?>
+}

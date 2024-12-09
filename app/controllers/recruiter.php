@@ -93,9 +93,29 @@ class recruiter extends DController{
     }
     public function applicantbyid() {
         session_start();
-        $id = $_GET['id'];
+
+        if(isset($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+
+        if($_GET['id'] == "") {
+            $_SESSION['flash_message'] = [
+                'type' => 'error',
+                'message' => 'Không có ứng viên để hiển thị!'
+            ];
+            header("Location: http://localhost/job_finder_website/recruiter/recruiter");
+            exit();
+        }
+
         if (isset($_SESSION['current']['user_id'])) {
             $user_id = $_SESSION['current']['user_id'];
+        }else {
+            $_SESSION['flash_message'] = [
+                'type' => 'error',
+                'message' => 'Truy cập thất bại!'
+            ];
+            header("Location: http://localhost/job_finder_website/recruiter/recruiter");
+            exit();
         }
 
         $jobmodel = $this->load->model('jobmodel');

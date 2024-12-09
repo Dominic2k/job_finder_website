@@ -23,7 +23,7 @@
             <div class="bottom-sidebar">
                 <div class="account-bottom-sidebar">
                     <div class="img-account">
-                        <img src="<?php echo isset($_SESSION['current']['avatar']) ? BASE_URL . '/' . $_SESSION['current']['avatar'] : 'public/img/default-avatar.png'; ?>" alt="avt-account">
+                        <img src="../public/img/<?php echo isset($_SESSION['current']['avatar']) ? $_SESSION['current']['avatar'] : 'public/img/default-avatar.png'; ?>" alt="avt-account">
                     </div>
 
                     <div class="info-account">
@@ -76,11 +76,11 @@
                                         <td><?php echo htmlspecialchars($application['job_title']); ?></td>
                                         <td><?php echo htmlspecialchars($application['apply_at']); ?></td>
 
-                                        <?php if ($application['application_status'] == 'accepted'): ?>
+                                        <?php if ($application['application_status'] == 'Đã chấp nhận'): ?>
                                             <td><span class="status accepted"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
-                                        <?php elseif ($application['application_status'] == 'pending'): ?>
+                                        <?php elseif ($application['application_status'] == 'Chờ xử lí'): ?>
                                             <td><span class="status pending"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
-                                        <?php elseif ($application['application_status'] == 'rejected'): ?>
+                                        <?php elseif ($application['application_status'] == 'Đã từ chối'): ?>
                                             <td><span class="status rejected"><?php echo htmlspecialchars($application['application_status']); ?></span></td>
                                         <?php endif; ?>
                                     </tr>

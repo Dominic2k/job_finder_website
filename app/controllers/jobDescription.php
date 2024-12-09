@@ -1,6 +1,6 @@
 <?php
 // app/controllers/jobDescription.php
-session_start();
+// session_start();
 
 class jobDescription extends DController {
 
@@ -9,7 +9,7 @@ class jobDescription extends DController {
     }
 
     public function index() {
-        // session_start(); // Gọi session_start() tại đây để sử dụng $_SESSION
+        session_start(); // Gọi session_start() tại đây để sử dụng $_SESSION
 
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (isset($_SESSION['current']) && !empty($_SESSION['current']['user_id'])) {
@@ -112,8 +112,5 @@ class jobDescription extends DController {
         header('Location: ' . $url);  // Chuyển hướng về trang công việc
         exit();
     }
-    
-    
-    
 }
 ?>

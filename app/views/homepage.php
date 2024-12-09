@@ -23,7 +23,6 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Calistoga&family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
 </head>
 <?php
     require_once './app/models/jobmodel.php';
@@ -38,7 +37,7 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
                 <span class="nameWebsite">JobEverlight</span>
                 <a class="a1" href="http://localhost/job_finder_website/searchjob/searchjob/industry=,pr=,type=,level=,search=">Tìm việc</a>
                 <a class="a2" href="http://localhost/job_finder_website/searchcompany/searchcompany/industry=,size=,search=">Duyệt các công ty</a>
-    </div>
+            </div>
     
             <div class="auth-buttons">
                 <?php if ($is_logged_in): ?>
@@ -46,14 +45,14 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
                     <div id="user-info" class="user-info">
                         <a href="<?php echo BASE_URL; ?>/myProfile/myProfile">
 
-                            <img class="logoAccount" src="<?php echo BASE_URL . '/' . $_SESSION['current']['avatar']; ?>" alt="User Avatar" class="user-avatar">
+                            <img class="logoAccount" src="public/img/<?php echo $_SESSION['current']['avatar']; ?>" alt="User Avatar" class="user-avatar">
                         </a>
                         <span id="username" class="username"><?php echo $_SESSION['current']['full_name']; ?></span>
                     </div>
                 <?php else: ?>
                     <!-- Nếu chưa đăng nhập, hiển thị nút đăng nhập và đăng ký -->
                     <button id="btn-login" class="btn-login"><a href="<?php echo BASE_URL; ?>login/login">Đăng nhập</a></button>
-                    <button id="btn-register" class="btn-register"><a href="<?php echo BASE_URL; ?>login/register">Đăng ký</a></button>
+                    <button id="btn-register" class="btn-register"><a href="<?php echo BASE_URL; ?>register/registerUser">Đăng ký</a></button>
                 <?php endif; ?>
             </div>
         </div>
@@ -177,7 +176,7 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
             } 
         ?>" class="job-card">
             <div class="job-logo">
-                <img src="<?php echo $job['comp_logo']; ?>" alt="Logo">
+                <img src="public/img/<?php echo $job['comp_logo']; ?>" alt="Logo">
             </div>
 
             <div class="infor-job-card">
@@ -210,7 +209,7 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
         <div class="footer-container">
             <div class="footer-small1-container">
                 <div class="intro-small-container">
-                    <h2>JobFunny</h2>
+                    <h2>JobEverlight</h2>
                     <p>Dành cho những người tìm việc đam mê khởi nghiệp tìm việc đam mê khởi nghiệp. Tìm công việc mơ ước của bạn dễ dàng hơn.</p>
                 </div>
 
@@ -250,15 +249,15 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
         </div>
     </div>
     <script>
-    const loginBtn = document.getElementById('btn-login');
-    const registerBtn = document.getElementById('btn-register');
-    loginBtn.addEventListener('click', function () {
-        window.location.href = "http://localhost/job_finder_website/login/login";
-    });
-    registerBtn.addEventListener('click', function () {
-        window.location.href = "http://localhost/job_finder_website/register/registerUser";
-    }
-    );
+    // const loginBtn = document.getElementById('btn-login');
+    // const registerBtn = document.getElementById('btn-register');
+    // loginBtn.addEventListener('click', function () {
+    //     window.location.href = "http://localhost/job_finder_website/login/login";
+    // });
+    // registerBtn.addEventListener('click', function () {
+    //     window.location.href = "http://localhost/job_finder_website/register/registerUser";
+    // }
+    // );
 </script>
 </body>
 </html>
