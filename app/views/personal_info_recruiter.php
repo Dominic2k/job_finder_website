@@ -65,7 +65,7 @@
                     <?php if (!empty($value['comp_logo'])): ?>
                         <div>
                             <p>Logo hiện tại:</p>
-                            <img src="../<?php echo $value['comp_logo']; ?>" alt="Logo hiện tại" style="max-width: 60px; height: auto;">
+                            <img src="../public/img/<?php echo $value['comp_logo']; ?>" alt="Logo hiện tại" style="max-width: 60px; height: auto;">
                         </div>
                     <?php endif; ?>
                     <input type="file" id="logo" name="comp_logo" accept="image/*">

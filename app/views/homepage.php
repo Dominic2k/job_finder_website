@@ -10,7 +10,7 @@ $is_logged_in = isset($_SESSION['current']) && !empty($_SESSION['current']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="public/css/homepage.css?v=<?php echo time(); ?>">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

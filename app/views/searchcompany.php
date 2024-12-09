@@ -508,7 +508,7 @@ if(isset($data)&&$data){
                 `
                 <a href="http://localhost/job_finder_website/companydetail/companydetail/${com.comp_name}">
                     <div class="company-card">
-                        <img src="stripe-logo.png" alt="Stripe" class="company-logo">
+                        <img src="../../public/img/${com.comp_logo}" alt="Stripe" class="company-logo">
                         <div class="company-info">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
                                 <h3>${com.comp_name}</h3>

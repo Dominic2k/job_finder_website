@@ -70,7 +70,7 @@
                                             // Nếu comp_logo là URL, chỉ cần hiển thị trực tiếp URL này
                                             $logo = isset($application['comp_logo']) && !empty($application['comp_logo']) ? $application['comp_logo'] : 'default_logo.png';
                                             ?>
-                                            <img src="<?php echo htmlspecialchars($logo); ?>" alt="Company Logo" style="max-width: 50px; max-height: 50px;">
+                                            <img src="../public/img/<?php echo htmlspecialchars($logo); ?>" alt="Company Logo" style="max-width: 50px; max-height: 50px;">
                                             <span><?php echo htmlspecialchars($application['comp_name']); ?></span>
                                         </td>
                                         <td><?php echo htmlspecialchars($application['job_title']); ?></td>
