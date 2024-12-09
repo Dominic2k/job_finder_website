@@ -81,7 +81,7 @@ class applicationModel extends DModel {
     }
 
     public function applyNewJob($table_applications, $data) {
-        return $this->db->insert($table_applications, $data);
+        return $this->db->insertApplication($table_applications, $data);
     }
 
 }

@@ -149,6 +149,7 @@ class jobmodel extends DModel {
                 a.apply_at AS application_date,
                 u.phone AS phone_number,
                 u.email AS email_address,
+                u.avatar as user_avatar,
                 a.cv AS cv_file
             FROM 
                 applications a

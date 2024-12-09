@@ -47,7 +47,7 @@
                 <div class="detail-container">
                     <!-- Bên trái -->
                     <div class="left-section">
-                        <img src="https://meatworld.com.vn/wp-content/uploads/anh-avatar-anime-2-1.jpg" alt="Avatar" class="avatar">
+                        <img src="../../public/img/<?php echo $value['user_avatar'];?>" alt="Avatar" class="avatar">
                         <h2><?php echo $value['candidate_name'];?></h2>
                         <p class="applied-info"><?php echo $value['job_title'];?></p>
                         <p class="applied-info"><?php echo $value['application_date'];?></p>
