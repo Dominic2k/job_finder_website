@@ -25,6 +25,22 @@ body {
     left: 345px;
     text-decoration: none;
 }
+.job-header .a1 {
+    position: absolute;
+    top: 27px;
+    left: 345px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #515B6F;
+}
+.job-header .a2 {
+    position: absolute;
+    top: 27px;
+    left: 445px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #515B6F;
+}
 
 .job-header img {
     position: absolute;
@@ -586,17 +602,17 @@ body {
     z-index: 1000;
     display: none;
     position: fixed;
-    top: 90px;
-    left: 550px;
+    top: 54px;
+    left: 20%;
     overflow: hidden;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    height: 710px;
+    height: 850px;
 }
 
 .myApplicationDetail-small-container {
     background-color: white;
     width: 700px;
-    height: 700px;
+    height: 750px;
     padding: 15px 40px;
     margin-top: 50px;
     margin-left: 50px;
@@ -652,14 +668,17 @@ body {
 .info-personal-myApplicationDetail .info-personal h4 {
     margin: 15px 0 20px 0;
     font-weight: lighter;
-    /* color: #515B6F; */
+    color: #515B6F;
+    font-size: 20px;
 }
 
 .info-personal-myApplicationDetail .info-personal input {
     /* margin-top: 7px; */
-    height: 35px;
+    height: 50px;
     width: 100%;
     border: 1px solid #D6DDEB;
+    padding-left: 10px;
+    font-size: 18px;
 }
 
 .full_name::after, .phone::after, .email::after {
@@ -678,11 +697,11 @@ body {
 .info-personal-myApplicationDetail .attachVC {
     display: flex;
     justify-content: space-between;
-    margin: 25px 0;
+    margin: 40px 0;
 }
 
 .info-personal-myApplicationDetail .attachVC h3 {
-    font-weight: lighter;
+    font-weight: bold;
     font-size: 18px;
 }
 
@@ -690,7 +709,7 @@ body {
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    border: 1px solid #4640DE;
+    border: 3px dashed #4640DE;
     border-radius: 8px;
     width: 300px;
     height: 65px;
@@ -729,11 +748,11 @@ body {
 .info-personal-myApplicationDetail button {
     background-color: #4640DE;
     border: none;
-    height: 45px;
+    height: 50px;
     color: white;
     font-weight: bold;
     font-size: 16px;
-    margin: 0px 0 10px 0px;
+    margin: 0px 0 25px 0px;
     width: 180px;
 }
 
