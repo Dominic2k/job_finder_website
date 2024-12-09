@@ -114,4 +114,3 @@ class jobDescription extends DController {
         exit();
     }
 }
-?>

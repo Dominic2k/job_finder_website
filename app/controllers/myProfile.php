@@ -48,8 +48,8 @@ class myProfile extends DController {
             $avatar_extension = pathinfo($avatar_name, PATHINFO_EXTENSION);
     
             // Tạo tên mới cho ảnh để tránh trùng lặp
-            $avatar_new_name = "avatar_" . $user_id . "." . $avatar_extension;
-            $avatar_path = "public/img/" . $avatar_new_name;
+            // $avatar_new_name = "" . $user_id . "." . $avatar_extension;
+            $avatar_path = "" . $avatar_name;
     
             // Nếu có ảnh cũ, xóa ảnh cũ
             if (isset($_SESSION['current']['avatar']) && file_exists($_SESSION['current']['avatar'])) {

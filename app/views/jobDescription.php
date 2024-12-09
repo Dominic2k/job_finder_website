@@ -34,7 +34,7 @@
         <div class="job-overview">
             <div class="job-summary">
                 <div class="left-job-summary">
-                    <img src="<?php echo $job['comp_logo'] ?>" alt="logo-company">
+                    <img src="public/img/<?php echo $job['comp_logo'] ?>" alt="logo-company">
                     <div class="info-job-summary">
                         <h2><?php echo $job['job_title'] ?></h2>
                         <p><?php echo $job['comp_name'] ?> • <?php echo $job['comp_address'] ?> • <?php echo $job['job_type_name'] ?></p>
@@ -167,7 +167,7 @@
                 <?php foreach ($similarJobs as $similarJob): ?>
                 <a href="#" class="job-card">
                 <div class="job-logo">
-                    <img src="<?php echo $similarJob['comp_logo']; ?>" alt="Logo">
+                    <img src="public/img/<?php echo $similarJob['comp_logo']; ?>" alt="Logo">
                 </div>
                 <div class="infor-job-card">
                     <h3><?php echo $similarJob['job_title']; ?></h3>
@@ -249,7 +249,7 @@
     <div class="myApplicationDetail-small-container">
         <!-- Thông tin công việc -->
         <div class="info-job-myApplicationDetail">
-            <div class="job-logo"><img src="../public/img/<?php echo $data['job']['comp_logo']; ?>" alt="logo_company"></div>
+            <div class="job-logo"><img src="public/img/<?php echo $data['job']['comp_logo']; ?>" alt="logo_company"></div>
             
             <div class="infor-job-card">
                 <h3><?php echo $data['job']['job_title']; ?></h3>
